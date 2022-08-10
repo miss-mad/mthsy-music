@@ -1,1 +1,1 @@
-# music-lyrics-better-name-later
+# Music Lyrics Group Project 1
