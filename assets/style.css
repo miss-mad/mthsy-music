@@ -1,0 +1,24 @@
+html
+{
+    background-image: linear-gradient(to bottom right, lightblue, lime);
+    min-height: 100%;
+}
+
+textarea 
+{
+    display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+button
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1
+{
+    text-align: center;
+}
