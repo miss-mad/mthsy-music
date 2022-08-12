@@ -1,3 +1,5 @@
-var myAPI = "";
-var lyricsAPI = "";
-var artistAPI = "";
+//Materialize related resizing transformation
+$('#textarea1').val('New Text');
+M.textareaAutoResize($('#textarea1'));
+
+
