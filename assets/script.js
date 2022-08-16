@@ -41,3 +41,8 @@ var lyricsovhApi = "https://api.lyrics.ovh";
 // }
 
 // .map() method - creates a new array from calling a function for every array element
+
+//Materialize related resizing transformation
+$('#textarea1').val('New Text');
+M.textareaAutoResize($('#textarea1'));
+

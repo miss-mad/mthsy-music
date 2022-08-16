@@ -1,14 +1,12 @@
 html
 {
-    background-image: linear-gradient(to bottom right, lightblue, lime);
+    background-image: linear-gradient(to bottom right, rgb(29, 245, 227),rgb(214, 109, 255) );
     min-height: 100%;
+    font-family: sans-serif,'Times New Roman', Times, serif;
 }
-
-textarea 
+.nav-wrapper
 {
-    display: block;
-   margin-left: auto;
-   margin-right: auto;
+    background-image: linear-gradient(to bottom right, rgb(89, 188, 245),rgb(218, 14, 236) );
 }
 
 button
@@ -16,9 +14,43 @@ button
     display: block;
     margin-left: auto;
     margin-right: auto;
+    justify-content: center;
 }
 
 h1
 {
     text-align: center;
+}
+
+.btn
+{
+    color: black;
+    font-weight: bold;
+    display: block;
+    justify-content: center;
+}
+
+#generate
+{
+    background-color: hotpink;
+}
+
+textarea 
+{
+    text-align: center;
+
+}
+
+#allsongs
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+footer
+{
+    font-weight: bold;
 }

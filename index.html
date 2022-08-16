@@ -5,23 +5,58 @@
     <head>
         <meta charset="UTF-8">
         <meta name = "viewport" content ="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link rel="stylesheet" href="./assets/style.css">
     
-        <title>MTHSY Music Search</title>
+        <title>MTHY Music Search</title>
     </head>
     
     <body>
-        <div id="header" class="jumbotron jumbotron-fluid text-container">
-            <h1 id="header-text" class="display-2">MTHSY MUSIC SEARCH!</h1>
+        <div id="header" class="">
+            <h1 id="header-text" class="display-2">IT'S MUSIC THYM!</h1>
         </div>
-        <textarea id="searchbar" placeholder="Type Your Lyrics, Artist Name, or Song Title!" label="searching"></textarea>
+        <nav>
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo">Welcome!</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="placeholder">Deez</a></li>
+                <li><a href="placeholder">Whatever</a></li>
+                <li><a href="./assets/githubindex.html">About</a></li>
+              </ul>
+            </div>
+          </nav>
+          <br>
+          <div>
+          </div>
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea id="textarea1" class="materialize-textarea"></textarea>
+                  <label for="textarea1">Type your lyrics, artist name, or song title!</label>
+                </div>
+              </div>
+            </form>
+          </div>
+
         <button id="generate" class="btn">Search!</button>
 
+
+        <section id = allsongs>
+          <ul style = "list-style-type: none;">
+            <li id = songsuggestion1>placeholder</li>
+            <li id = songsuggestion2>placeholder</li>
+            <li id = songsuggestion3>placeholder</li>
+            <li id = songsuggestion4>placeholder</li>
+            <li id = songsuggestion5>placeholder</li>
+          </ul>
+
+        </section>
         
     </body>
     
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/script.js"></script>
-    <footer>Made by Terry Kim, Madeleine Harris, Hunter O'Neal, Yohannes Anbessa, Serraiah?</footer>
+    <footer>Made by Terry Kim, Madeleine Harris, Hunter O'Neal, Yohannes Anbessa</footer>
 </html>
