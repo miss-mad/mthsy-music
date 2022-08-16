@@ -9,20 +9,31 @@ html
     background-image: linear-gradient(to bottom right, rgb(204, 104, 243),rgb(29, 245, 227));
 }
 
-nav
+.homepage
 {
-
-    background: -webkit-linear-gradient(rgb(147, 20, 252), rgb(77, 52, 83)) !important;
-    font-weight: bold !important;
-    -webkit-background-clip: text;
-
+    color: black;
+    font-weight: bold;
+    font-size: large;
 }
 
+.whatever
+{
+    color: black;
+    font-weight: bold;
+    font-size: large;
+}
+
+.aboutme
+{
+    color: black;
+    font-weight: bold;
+    font-size: large;
+}
 
 .brand-logo 
 {
     font-size: 72px;
-    background: -webkit-linear-gradient(rgb(147, 20, 252), rgb(77, 52, 83));
+    background-image: -webkit-linear-gradient(rgb(242, 239, 245), rgb(138, 208, 255));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: bold;
