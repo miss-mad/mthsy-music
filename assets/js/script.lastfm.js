@@ -1,5 +1,5 @@
 // var artist = $("#artistinput");
-var songTitle = $("#titleinput");
+// var songTitle = $("#titleinput");
 var artistButton = $(".artistbutton");
 var titleButton = $(".titlebutton");
 
@@ -20,6 +20,7 @@ function getUserInputArtistName(event) {
 
 function lastfmAPICallArtistTopSongs(artist) {
   console.log("artist top songs function is working");
+
   var baseURL =
     "https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&format=json";
 
@@ -63,40 +64,89 @@ function displayArtistTopSongs(data) {
   console.log(userInputArtistName);
 
   var artistTopSongsDiv = $("#displayinfo");
+
   var artistTopSongsList = $("#songsuggestion1");
+  // artistTopSongsList.css("display", "flex");
+
   for (var i = 0; i < 5; i++) {
     var topFiveTracks = data.toptracks.track[i].name;
     console.log(topFiveTracks);
-    artistTopSongsList.text(topFiveTracks);
+    artistTopSongsList.append(topFiveTracks);
     artistTopSongsDiv.append(artistTopSongsList);
   }
 }
 
-function getUserInputSongTitleSearch(event) {}
+function getUserInputSongTitleSearch(event) {
+  console.log("user input function is working");
+  event.preventDefault();
 
-function lastfmAPICallSongTitleSearch(searchBarInput) {
+  var userInputSongTitleSearch = $("#titleinput").val().trim();
+  console.log(userInputSongTitleSearch);
+
+  // if (!userInputArtistName) {
+  // insert modal here https://www.w3schools.com/howto/howto_css_modals.asp
+  // "Please enter an artist's name"
+  // }
+
+  lastfmAPICallSongTitleSearch(userInputSongTitleSearch);
+}
+
+function lastfmAPICallSongTitleSearch(songTitle) {
   console.log("song title search function is working");
 
-  if (urlType === "songTitleSearch") {
-    baseURL =
-      "http://ws.audioscrobbler.com/2.0/?method=track.search&format=json&";
+  var baseURL =
+    "http://ws.audioscrobbler.com/2.0/?method=track.search&format=json";
 
-    var songTitle = searchBarInput;
-    var parametersSongTitleSearch = `&api_key=${lastfmAPIKey}&track=${songTitle}`;
+  var lastfmAPIKey = "807f87e7dcc6c31a458c4ab1feb542c2";
+  var parametersSongTitleSearch = `&api_key=${lastfmAPIKey}&track=${songTitle}`;
 
-    baseURL = baseURL + parametersSongTitleSearch;
-  }
+  baseURL = baseURL + parametersSongTitleSearch;
+  console.log(baseURL);
 
-  fetch(baseURL)
+  var requestOptions = {
+    method: "GET",
+    redirect: "follow",
+  };
+
+  fetch(baseURL, requestOptions)
     .then(function (response) {
       if (response.ok) {
         return response.json();
       }
       throw new Error(response.statusText);
     })
+
     .then(function (data) {
-      console.log("artist top songs: ", data);
+      console.log("song title search: ", data);
+      displaySongTitleSearch(data);
+    })
+
+    .catch(function (error) {
+      console.log("error from API: ", error);
+      // insert another modal here that says
+      // "ERROR - please make sure you have spelled the artist's name correctly"
     });
+}
+
+function displaySongTitleSearch(data) {
+  console.log("displaySongTitleSearch function is working");
+  var userInputSongTitleSearch = $("#titleinput").val().trim();
+  $("#titleinput").val("");
+  console.log(userInputSongTitleSearch);
+
+  var songTitleSearchDiv = $("#displayinfo");
+
+  var songTitleSearchList = $("#songsuggestion1");
+  // songTitleSearchList.css("display", "flex");
+
+  for (var i = 0; i < 5; i++) {
+    var songTitleNameTopFive = data.results.trackmatches.track[i].name;
+    var songTitleArtistTopFive = data.results.trackmatches.track[i].artist;
+    var resultsSongAndArtist = songTitleNameTopFive + " " + "by " + songTitleArtistTopFive;
+    // console.log("artists matching top five song titles for searched song: ", songTitleArtistTopFive);
+    songTitleSearchList.append(resultsSongAndArtist);
+    songTitleSearchDiv.append(songTitleSearchList);
+  }
 }
 
 // artist top songs
@@ -115,4 +165,4 @@ function lastfmAPICallSongTitleSearch(searchBarInput) {
 
 artistButton.on("click", getUserInputArtistName);
 
-// titleButton.on("click", );
+titleButton.on("click", getUserInputSongTitleSearch);
