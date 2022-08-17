@@ -1,13 +1,43 @@
 html
 {
-    background-image: linear-gradient(to bottom right, rgb(29, 245, 227),rgb(214, 109, 255) );
+    background-image: linear-gradient(to bottom right, rgb(29, 245, 227)40%,rgb(204, 104, 243)60%);
     min-height: 100%;
     font-family: sans-serif,'Times New Roman', Times, serif;
 }
 .nav-wrapper
 {
-    background-image: linear-gradient(to bottom right, rgb(89, 188, 245),rgb(218, 14, 236) );
+    background-image: linear-gradient(to bottom right, rgb(204, 104, 243),rgb(29, 245, 227));
 }
+
+.homepage
+{
+    color: black;
+    font-weight: bold;
+    font-size: large;
+}
+
+.whatever
+{
+    color: black;
+    font-weight: bold;
+    font-size: large;
+}
+
+.aboutme
+{
+    color: black;
+    font-weight: bold;
+    font-size: large;
+}
+
+.brand-logo 
+{
+    font-size: 72px;
+    background-image: -webkit-linear-gradient(rgb(242, 239, 245), rgb(138, 208, 255));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+  }
 
 button
 {
@@ -15,6 +45,12 @@ button
     margin-left: auto;
     margin-right: auto;
     justify-content: center;
+}
+
+#header-text
+{
+    font-family:  "New Century Schoolbook";
+    text-shadow: 2px 2px 1px;
 }
 
 h1
@@ -35,13 +71,19 @@ h1
     background-color: hotpink;
 }
 
-textarea 
+textarea
 {
     text-align: center;
 
 }
 
-#allsongs
+label
+{
+    font-weight: bold !important;
+    color: black !important;
+}
+
+#displayinfo
 {
     display: flex;
     flex-direction: column;
