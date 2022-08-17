@@ -14,39 +14,47 @@
 // fullYTURLPath = ytURL + artistName.value + ytAPIKey
 
 // function YouTubeResults(fullYTURLPath) {
-    
+
 //     fetch(fullYTURLPath)
 //         .then(function (response) {
 //             console.log(response)
 //             if(response.status === 200) {
-                
+
 //             }
 //         })
-    
 
-    
 // }
-var searchButton = document.querySelector("#generate")
+var searchButton = document.querySelector("#generate");
 
-searchButton.addEventListener("click", function() {
+searchButton.addEventListener("click", function () {
+  const ytURL =
+    "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=";
+  var ytAPIKey = "&key=AIzaSyCWnH7bNyWEB88X6WFI9tLPCGqPa9ueJBA";
 
-const ytURL = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q="
-var ytAPIKey="&key=AIzaSyCWnH7bNyWEB88X6WFI9tLPCGqPa9ueJBA"
+  var artistName = document.getElementById("artistinput").value;
+  var songName = document.getElementById("titleinput").value;
 
-var artistName = document.getElementById("artistinput").value
-var songName = document.getElementById("titleinput").value
+  urlFriendlyArtist = artistName.replace(/\s/g, "+");
+  urlFriendlySong = songName.replace(/\s/g, "+");
 
-urlFriendlyArtist = artistName.replace(/\s/g, '+')
-urlFriendlySong = songName.replace(/\s/g, '+')
+  fullYTURLPath = ytURL + urlFriendlyArtist + "+" + urlFriendlySong + ytAPIKey;
 
-fullYTURLPath = ytURL + urlFriendlyArtist + '+' + urlFriendlySong + ytAPIKey
+  console.log(fullYTURLPath);
 
-console.log(fullYTURLPath)
-    
-    fetch(fullYTURLPath)
-        .then(function (response) {
-            console.log(response)
-            if(response.status === 200) {
-                
-            }
-        }
+  fetch(fullYTURLPath)
+    .then(function (response) {
+      console.log(response);
+      if(response.status === 200) {
+        return response.json()
+      }
+      throw new Error(response.statusText)
+    })
+    .then(function (data) {
+        console.log(data)
+        console.log(data.items)
+      console.log(data.items[0].id.videoId);
+    })
+    .catch(function(error){
+        console.log("Error from API: ", error)
+    });
+});
