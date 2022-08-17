@@ -1,6 +1,6 @@
 html
 {
-    background-image: linear-gradient(to bottom right, rgb(29, 245, 227)40%,rgb(204, 104, 243)60%);
+    background-image: linear-gradient(to bottom right, rgb(25, 228, 211)40%,rgb(204, 104, 243)60%);
     min-height: 100%;
     font-family: sans-serif,'Times New Roman', Times, serif;
 }
@@ -37,7 +37,7 @@ html
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: bold;
-  }
+}
 
 button
 {
@@ -71,7 +71,9 @@ h1
     background-color: hotpink;
 }
 
-textarea
+
+
+textarea 
 {
     text-align: center;
 
@@ -83,7 +85,24 @@ label
     color: black !important;
 }
 
-#displayinfo
+
+#songsuggestion1
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#songvideo
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#concertevent
 {
     display: flex;
     flex-direction: column;
