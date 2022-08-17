@@ -10,5 +10,5 @@ var UserInput = "";
 
 
 
-var url = TicketUrl + UserInput + TicketUrlAPI + TicketAPIKey;
+var url = TicketUrlSearch + UserInput + TicketUrlAPI + TicketAPIKey;
 
