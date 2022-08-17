@@ -11,6 +11,17 @@ function lastfmAPICallArtistTopSongs(searchBarInput, urlType) {
 
     baseURL = baseURL + parametersTopSongs;
   }
+
+  fetch(baseURL)
+    .then(function (response) {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response.statusText);
+    })
+    .then(function (data) {
+      console.log("artist top songs: ", data);
+    });
 }
 
 function lastfmAPICallSongTitleSearch(searchBarInput) {
@@ -23,6 +34,17 @@ function lastfmAPICallSongTitleSearch(searchBarInput) {
 
     baseURL = baseURL + parametersSongTitleSearch;
   }
+
+  fetch(baseURL)
+    .then(function (response) {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response.statusText);
+    })
+    .then(function (data) {
+      console.log("artist top songs: ", data);
+    });
 }
 
 // artist top songs
