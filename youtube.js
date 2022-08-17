@@ -50,9 +50,8 @@ searchButton.addEventListener("click", function () {
       throw new Error(response.statusText)
     })
     .then(function (data) {
-        console.log(data)
-        console.log(data.items)
-      console.log(data.items[0].id.videoId);
+        console.log(data.items[0].id.videoId);
+        var videoID = data.items[0].id.videoID
     })
     .catch(function(error){
         console.log("Error from API: ", error)
