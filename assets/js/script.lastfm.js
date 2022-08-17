@@ -1,5 +1,3 @@
-// var artist = $("#artistinput");
-// var songTitle = $("#titleinput");
 var artistButton = $(".artistbutton");
 var titleButton = $(".titlebutton");
 
@@ -10,10 +8,10 @@ function getUserInputArtistName(event) {
   var userInputArtistName = $("#artistinput").val().trim();
   console.log(userInputArtistName);
 
-  // if (!userInputArtistName) {
-  // insert modal here https://www.w3schools.com/howto/howto_css_modals.asp
-  // "Please enter an artist's name"
-  // }
+  if (!userInputArtistName) {
+  insert modal here https://www.w3schools.com/howto/howto_css_modals.asp
+  "Please enter an artist's name"
+  }
 
   lastfmAPICallArtistTopSongs(userInputArtistName);
 }
@@ -143,7 +141,7 @@ function displaySongTitleSearch(data) {
     var songTitleNameTopFive = data.results.trackmatches.track[i].name;
     var songTitleArtistTopFive = data.results.trackmatches.track[i].artist;
     var resultsSongAndArtist = songTitleNameTopFive + " " + "by " + songTitleArtistTopFive;
-    // console.log("artists matching top five song titles for searched song: ", songTitleArtistTopFive);
+    console.log(resultsSongAndArtist);
     songTitleSearchList.append(resultsSongAndArtist);
     songTitleSearchDiv.append(songTitleSearchList);
   }
