@@ -1,6 +1,8 @@
+// attribute selectors to find the matching html classes for which we later add event listeners for when the user clicks these buttons
 var artistButton = $(".artistbutton");
 var titleButton = $(".titlebutton");
 
+// function to retrieve the user input when they place
 function getUserInputArtistName(event) {
   console.log("user input function is working");
   event.preventDefault();
@@ -8,13 +10,20 @@ function getUserInputArtistName(event) {
   var userInputArtistName = $("#artistinput").val().trim();
   console.log(userInputArtistName);
 
-  if (!userInputArtistName) {
-  insert modal here https://www.w3schools.com/howto/howto_css_modals.asp
-  "Please enter an artist's name"
-  }
+  // if (!userInputArtistName) {
+  // insert modal here https://www.w3schools.com/howto/howto_css_modals.asp
+  // "Please enter an artist's name"
+  // }
 
   lastfmAPICallArtistTopSongs(userInputArtistName);
 }
+
+// artist top songs
+// https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&format=json&api_key=807f87e7dcc6c31a458c4ab1feb542c2&artist=coldplay
+// method
+// format
+// api key
+// artist
 
 function lastfmAPICallArtistTopSongs(artist) {
   console.log("artist top songs function is working");
@@ -89,6 +98,13 @@ function getUserInputSongTitleSearch(event) {
   lastfmAPICallSongTitleSearch(userInputSongTitleSearch);
 }
 
+// song title search
+// http://ws.audioscrobbler.com/2.0/?method=track.search&format=json&api_key=807f87e7dcc6c31a458c4ab1feb542c2&track=yellow
+// method
+// format
+// api key
+// track
+
 function lastfmAPICallSongTitleSearch(songTitle) {
   console.log("song title search function is working");
 
@@ -140,27 +156,16 @@ function displaySongTitleSearch(data) {
   for (var i = 0; i < 5; i++) {
     var songTitleNameTopFive = data.results.trackmatches.track[i].name;
     var songTitleArtistTopFive = data.results.trackmatches.track[i].artist;
-    var resultsSongAndArtist = songTitleNameTopFive + " " + "by " + songTitleArtistTopFive;
+    var resultsSongAndArtist =
+      songTitleNameTopFive + " " + "by " + songTitleArtistTopFive;
     console.log(resultsSongAndArtist);
     songTitleSearchList.append(resultsSongAndArtist);
     songTitleSearchDiv.append(songTitleSearchList);
   }
 }
 
-// artist top songs
-// https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&format=json&api_key=807f87e7dcc6c31a458c4ab1feb542c2&artist=coldplay
-// method
-// format
-// api key
-// artist
-
-// song title search
-// http://ws.audioscrobbler.com/2.0/?method=track.search&format=json&api_key=807f87e7dcc6c31a458c4ab1feb542c2&track=yellow
-// method
-// format
-// api key
-// track
-
 artistButton.on("click", getUserInputArtistName);
 
 titleButton.on("click", getUserInputSongTitleSearch);
+
+// single
