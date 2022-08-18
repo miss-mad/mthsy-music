@@ -87,6 +87,15 @@ label {
   justify-content: center;
 }
 
+#concertevent, #concertdate, #concertname, #venuename, #concerturl
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
 #songvideo {
   display: flex;
   flex-direction: column;
@@ -94,16 +103,7 @@ label {
   justify-content: center;
 }
 
-#concertevent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
 
-footer {
-  font-weight: bold;
-}
 
 #sticky {
   position: sticky;
@@ -114,9 +114,12 @@ footer {
 
 footer {
   text-align: center;
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
   height: 60px;
   background: hotpink;
+  font-weight: bold;
+
 }
+
