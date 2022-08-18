@@ -1,68 +1,90 @@
 <!DOCTYPE html>
 
-<html class="responsive-img" lang = "en">
+<html class="responsive-img" lang="en">
+  <head class="responsive-img">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
 
-    <head class="responsive-img">
-        <meta charset="UTF-8">
-        <meta name = "viewport" content ="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        <link rel="stylesheet" href="./assets/css/style.css">
-    
-        <title>MTHSY Music Search</title>
-    </head>
-    
-    <body>
-        <div id="header" class="">
-            <h1 id="header-text" class="display-2">IT'S MTHSY MUSIC!</h1>
+    <title>MTHSY Music Search</title>
+  </head>
+
+  <body>
+    <div id="header" class="">
+      <h1 id="header-text" class="display-2">IT'S MTHSY MUSIC!</h1>
+    </div>
+    <nav>
+      <div class="nav-wrapper">
+        <a class="brand-logo">&nbsp;Welcome!</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down navlist">
+          <li><a href="placeholder" class="homepage">Home</a></li>
+          <li><a href="placeholder" class="whatever">Whatever</a></li>
+          <li><a href="./assets/githubindex.html" class="aboutme">About</a></li>
+        </ul>
+      </div>
+    </nav>
+    <br />
+    <div></div>
+    <div class="row">
+      <div class="col s6">
+        <div class="input-field col s12">
+          <textarea id="artistinput" class="materialize-textarea"></textarea>
+          <label id="textarea1">Find an artist's name!</label>
         </div>
-        <nav>
-            <div class="nav-wrapper">
-              <a class="brand-logo">&nbsp;Welcome!</a>
-              <ul id="nav-mobile" class="right hide-on-med-and-down navlist">
-                <li><a href="placeholder" class="homepage">Home</a></li>
-                <li><a href="placeholder" class="whatever">Whatever</a></li>
-                <li><a href="./assets/githubindex.html" class="aboutme">About</a></li>
-              </ul>
-              
-              </div>
-          </nav>
-          <br>
-          <div>
-          </div>
-        <div class="row">
-          <div class="col s6">
-            <div class="input-field col s12">
-            <textarea id="artistinput" class="materialize-textarea"></textarea>
-            <label id="textarea1">Find an artist's name!</label>
-          </div>
-          <button id="artistbuttons" class="btn artistbutton">Search!</button>
-          </div>
-          <div class="col s6">
-            <div class="input-field col s12">
-            <textarea id="titleinput" class="materialize-textarea"></textarea>
-            <label id="textarea1">Find a song title!</label>
-
+        <button id="artistbuttons" class="btn artistbutton modal-trigger">
+          Search!
+        </button>
+        <div class="artist-modal">
+          <div class="modal-content">
+            <span class="close"
+              ><p>The artist you supplied could not be found</p></span
+            >
           </div>
         </div>
-        <button id="titlebuttons" class="btn titlebutton">Search!</button>
-        </div>       
-        <a class="btn-small" id="sticky" class="waves-effect waves-light btn">Scroll up</a>
+      </div>
+      <div class="col s6">
+        <div class="input-field col s12">
+          <textarea id="titleinput" class="materialize-textarea"></textarea>
+          <label id="textarea1">Find a song title!</label>
+        </div>
+      </div>
+      <button id="titlebuttons" class="btn titlebutton modal-trigger">
+        Search!
+      </button>
+      <div class="song-title-modal">
+        <div class="modal-content">
+          <span class="close"><p>Please enter a valid song title</p></span>
+        </div>
+      </div>
+    </div>
+    <a class="btn-small" id="sticky" class="waves-effect waves-light btn"
+      >Scroll up</a
+    >
 
-        <section id = displayinfo>
-          <ul style = "list-style-type: none;">
-            <li id = songsuggestion1>Madeleine - top track should pop up here.</li>
-            <li><iframe id="YouTubeVideo" height="853" width="400" ></iframe>Hunter - top track video via youtube should pop up here.</li>
-            <li id = concertevent>Terry - concert should pop up here.</li>
-          </ul>
-        </section> 
+    <section id="displayinfo">
+      <ul style="list-style-type: none">
+        <li id="songsuggestion1">Madeleine - top track should pop up here.</li>
+        <li>
+          <iframe id="YouTubeVideo" height="853" width="400"></iframe>Hunter -
+          top track video via youtube should pop up here.
+        </li>
+        <li id="concertevent">Terry - concert should pop up here.</li>
+      </ul>
+    </section>
 
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/script.lastfm.js"></script>
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/ticketmasterscript.js"></script>
     <script src="./assets/js/youtube.js"></script>
-    <footer>&nbsp;Made by Terry Kim, Madeleine Harris, Hunter O'Neal, Yohannes Anbessa, Serraiah Floyd</footer>
+    <footer>
+      &nbsp;Made by Terry Kim, Madeleine Harris, Hunter O'Neal, Yohannes
+      Anbessa, Serraiah Floyd
+    </footer>
   </body>
 </html>
