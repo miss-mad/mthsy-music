@@ -72,8 +72,6 @@ h1
     background-color: hotpink;
 }
 
-
-
 textarea 
 {
     text-align: center;
@@ -85,7 +83,6 @@ label
     font-weight: bold !important;
     color: black !important;
 }
-
 
 #songsuggestion1
 {
@@ -103,14 +100,14 @@ label
     justify-content: center;
 }
 
-#concertevent
+#concertevent, #concertdate, #concertname, #venuename, #concerturl
 {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-weight: bold;
 }
-
 
 footer
 {
@@ -124,12 +121,12 @@ footer
     left:0;
 }
 
-
 footer{
     text-align: center;
-    position:absolute;
+    position:relative;
     bottom:0;
     width:100%;
     height:60px;
     background:hotpink;
 }
+
