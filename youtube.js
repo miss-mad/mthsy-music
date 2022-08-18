@@ -53,10 +53,9 @@ searchButton.addEventListener("click", function () {
         console.log(data.items[0].id.videoId);
 
         var UniqueVidId = data.items[0].id.videoId
-        document.getElementById("YouTubeVideo").src = "https://www.youtube.com/watch?v=" + UniqueVidId +
+        document.getElementById("YouTubeVideo").src = "https://www.youtube.com/watch?v=" + UniqueVidId 
     })
     .catch(function(error){
         console.log("Error from API: ", error)
     });
 });
-
