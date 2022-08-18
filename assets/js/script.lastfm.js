@@ -189,4 +189,11 @@ artistButton.on("click", getUserInputArtistName);
 titleButton.on("click", getUserInputSongTitleSearch);
 
 // single variable for implementing into the youtube API
-// var firstArtistTopSong = data.toptracks.track[0].name;
+// var firstSongForYoutubeAPI = data.toptracks.track[0].name;
+// insert plus signs into the spaces
+// 
+
+// single variable for implementing into the ticketmaster API
+// var artistNameForTicketMasterAPI = data.results.trackmatches.track[0].artist;
+// insert plus signs into the spaces
+//
