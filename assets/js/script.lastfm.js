@@ -1,4 +1,4 @@
-// attribute selectors to find the matching html classes for which we later add event listeners for when the user clicks these buttons
+// jQuery attribute selectors to find the matching html classes for these buttons. we attach event listeners to both of these buttons so that certain functions execute when the user clicks these buttons
 var artistButton = $(".artistbutton");
 var titleButton = $(".titlebutton");
 
@@ -165,7 +165,6 @@ function displaySongTitleSearch(data) {
 }
 
 artistButton.on("click", getUserInputArtistName);
-
 titleButton.on("click", getUserInputSongTitleSearch);
 
-// single
+// single 
