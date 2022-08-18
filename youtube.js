@@ -51,9 +51,12 @@ searchButton.addEventListener("click", function () {
     })
     .then(function (data) {
         console.log(data.items[0].id.videoId);
-        var videoID = data.items[0].id.videoID
+
+        var UniqueVidId = data.items[0].id.videoId
+        document.getElementById("YouTubeVideo").src = "https://www.youtube.com/watch?v=" + UniqueVidId +
     })
     .catch(function(error){
         console.log("Error from API: ", error)
     });
 });
+
