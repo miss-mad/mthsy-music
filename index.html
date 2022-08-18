@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
-<html lang = "en">
+<html class="responsive-img" lang = "en">
 
-    <head>
+    <head class="responsive-img">
         <meta charset="UTF-8">
         <meta name = "viewport" content ="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -23,7 +23,8 @@
                 <li><a href="placeholder" class="whatever">Whatever</a></li>
                 <li><a href="./assets/githubindex.html" class="aboutme">About</a></li>
               </ul>
-            </div>
+              
+              </div>
           </nav>
           <br>
           <div>
@@ -40,10 +41,13 @@
             <div class="input-field col s12">
             <textarea id="titleinput" class="materialize-textarea"></textarea>
             <label id="textarea1">Find a song title!</label>
+
           </div>
         </div>
         <button id="titlebuttons" class="btn titlebutton">Search!</button>
-        </div>
+        </div>       
+        <a class="btn-small" id="sticky" class="waves-effect waves-light btn">Scroll up</a>
+
         <section id = displayinfo>
           <ul style = "list-style-type: none;">
             <li id = songsuggestion1>Madeleine - top track should pop up here.</li>
