@@ -15,25 +15,19 @@ function getUserInputArtistName(event) {
   console.log(userInputArtistName);
 
   if (!userInputArtistName) {
-    console.log(typeof userInputArtistName);
-    artistButton.on("click", function () {
-      artistModal.css("display", "block");
-    });
-    modalClose.on("click", function () {
-      artistModal.css("display", "none");
-    });
-    window.onclick = function (event) {
-      if (event.target == artistModal) {
-        artistModal.css("display", "none");
-      }
-    };
+    var modal = document.getElementById("modal");
+    console.log(modal);
+    var instance = M.Modal.init(modal);
+    console.log(instance);
+    instance.open();
+    return;
   }
 
   // calls this function to execute the lastfm API call, giving it the user's input of artist name
   lastfmAPICallArtistTopSongs(userInputArtistName);
 
   // calls ticketmaster's function to execute that API call, giving it the user's input as well
-  // ticketmasterArtistInputFunctionName(userInputArtistName);
+  Ticketmaster(userInputArtistName);
 }
 
 // function that uses the lastFM API via their artist.gettoptracks method
@@ -104,10 +98,14 @@ function getUserInputSongTitleSearch(event) {
   var userInputSongTitleSearch = $("#titleinput").val().trim();
   console.log(userInputSongTitleSearch);
 
-  // if (!userInputArtistName) {
-  // insert modal here https://www.w3schools.com/howto/howto_css_modals.asp
-  // "Please enter a song title"
-  // }
+  if (!userInputSongTitleSearch) {
+    var modal = document.getElementById("modal");
+    console.log(modal);
+    var instance = M.Modal.init(modal);
+    console.log(instance);
+    instance.open();
+    return;
+  }
 
   // calls this function to execute the lastfm API call, giving it the user's input of song title
   lastfmAPICallSongTitleSearch(userInputSongTitleSearch);
