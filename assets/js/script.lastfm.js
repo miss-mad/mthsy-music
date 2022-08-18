@@ -4,7 +4,6 @@ var titleButton = $(".titlebutton");
 
 // function to retrieve the user input when they type an artist name
 function getUserInputArtistName(event) {
-  console.log("user input function is working");
   // prevents default behavior of the button refreshing the page
   event.preventDefault();
 
@@ -19,19 +18,13 @@ function getUserInputArtistName(event) {
 
   // calls this function to execute the lastfm API call, giving it the user's input of artist name
   lastfmAPICallArtistTopSongs(userInputArtistName);
-}
 
-// artist top songs
-// https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&format=json&api_key=807f87e7dcc6c31a458c4ab1feb542c2&artist=coldplay
-// method
-// format
-// api key
-// artist
+  // calls ticketmaster's function to execute that API call, giving it the user's input as well
+  // ticketmasterArtistInputFunctionName(userInputArtistName);
+}
 
 // function that uses the lastFM API via their artist.gettoptracks method
 function lastfmAPICallArtistTopSongs(artist) {
-  console.log("artist top songs function is working");
-
   // creates the queryURL, which is the baseURL appended to the query terms, to be used in the fetch API
   var baseURL =
     "https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&format=json";
@@ -59,6 +52,7 @@ function lastfmAPICallArtistTopSongs(artist) {
     .then(function (data) {
       console.log("artist top songs: ", data);
       displayArtistTopSongs(data);
+      lastfmAPIToYoutubeAPI(data);
     })
 
     // catches any errors the user might input and displays an error message
@@ -71,11 +65,8 @@ function lastfmAPICallArtistTopSongs(artist) {
 
 // function to display the top five songs of any given artist the user searched for
 function displayArtistTopSongs(data) {
-  console.log("displayArtistTopSongs function is working");
-
   var userInputArtistName = $("#artistinput").val().trim();
   $("#artistinput").val("");
-  console.log(userInputArtistName);
 
   var artistTopSongsDiv = $("#displayinfo");
 
@@ -93,7 +84,6 @@ function displayArtistTopSongs(data) {
 
 // function to retrieve the user input when they type a song title
 function getUserInputSongTitleSearch(event) {
-  console.log("user input function is working");
   // prevents default behavior of the button refreshing the page
   event.preventDefault();
 
@@ -110,17 +100,8 @@ function getUserInputSongTitleSearch(event) {
   lastfmAPICallSongTitleSearch(userInputSongTitleSearch);
 }
 
-// song title search
-// http://ws.audioscrobbler.com/2.0/?method=track.search&format=json&api_key=807f87e7dcc6c31a458c4ab1feb542c2&track=yellow
-// method
-// format
-// api key
-// track
-
 // function that uses the lastFM API via their track.search method
 function lastfmAPICallSongTitleSearch(songTitle) {
-  console.log("song title search function is working");
-
   // creates the queryURL, which is the baseURL appended to the query terms, to be used in the fetch API
   var baseURL =
     "http://ws.audioscrobbler.com/2.0/?method=track.search&format=json";
@@ -149,6 +130,7 @@ function lastfmAPICallSongTitleSearch(songTitle) {
     .then(function (data) {
       console.log("song title search: ", data);
       displaySongTitleSearch(data);
+      lastfmAPIToTicketmasterAPI(data);
     })
 
     // catches any errors the user might input and displays an error message
@@ -161,8 +143,6 @@ function lastfmAPICallSongTitleSearch(songTitle) {
 
 // function to display the top five matching song + artist results of any given song title the user searched for
 function displaySongTitleSearch(data) {
-  console.log("displaySongTitleSearch function is working");
-
   var userInputSongTitleSearch = $("#titleinput").val().trim();
   $("#titleinput").val("");
   console.log(userInputSongTitleSearch);
@@ -188,16 +168,23 @@ function displaySongTitleSearch(data) {
 artistButton.on("click", getUserInputArtistName);
 titleButton.on("click", getUserInputSongTitleSearch);
 
-// merge all APIs on one js file
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// merge all APIs on one js file here
 
-// single variable for implementing into the youtube API
-// var firstSongForYoutubeAPI = data.toptracks.track[0].name;
-// insert plus signs into the spaces
-// if () {
-// 
-// }
+// function to give youtube API the lastfm artistTopSongs data (just the first song to retrieve a video)
+function lastfmAPIToYoutubeAPI (firstSong) {
+  console.log(firstSong);
+  // single variable for implementing into the youtube API
+  // insert plus signs into the spaces
+  var firstArtistSongForYoutubeAPI = firstSong.toptracks.track[0].name.split(" ").join("+");
+  console.log(firstArtistSongForYoutubeAPI);
+}
 
-// single variable for implementing into the ticketmaster API
-// var artistNameForTicketMasterAPI = data.results.trackmatches.track[0].artist;
-// insert plus signs into the spaces
-//
+// function to give ticketmaster API the lastfm songTitleSearch data (just the first result's artst name to retrieve info about upcoming concerts)
+function lastfmAPIToTicketmasterAPI (firstArtist) {
+  console.log(firstArtist);
+  // single variable for implementing into the ticketmaster API
+  // insert plus signs into the spaces
+  var firstArtistResultForTicketmasterAPI = firstArtist.results.trackmatches.track[13].artist.split(" ").join("+");
+  console.log(firstArtistResultForTicketmasterAPI);
+}
