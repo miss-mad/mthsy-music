@@ -1,6 +1,9 @@
 // attribute selectors to find the matching html classes for which we later add event listeners for when the user clicks these buttons
 var artistButton = $(".artistbutton");
 var titleButton = $(".titlebutton");
+var artistModal = $(".artist-modal");
+var songTitleModal = $(".song-title-modal");
+var modalClose = $(".close");
 
 // function to retrieve the user input when they type an artist name
 function getUserInputArtistName(event) {
@@ -11,16 +14,20 @@ function getUserInputArtistName(event) {
   var userInputArtistName = $("#artistinput").val().trim();
   console.log(userInputArtistName);
 
-  // if (!userInputArtistName) {
-  // insert modal here https://www.w3schools.com/howto/howto_css_modals.asp
-  // "Please enter an artist's name"
-  // }
+  if (!userInputArtistName) {
+    var modal = document.getElementById("modal");
+    console.log(modal);
+    var instance = M.Modal.init(modal);
+    console.log(instance);
+    instance.open();
+    return;
+  }
 
   // calls this function to execute the lastfm API call, giving it the user's input of artist name
   lastfmAPICallArtistTopSongs(userInputArtistName);
 
   // calls ticketmaster's function to execute that API call, giving it the user's input as well
-  // ticketmasterArtistInputFunctionName(userInputArtistName);
+  Ticketmaster(userInputArtistName);
 }
 
 // function that uses the lastFM API via their artist.gettoptracks method
@@ -91,10 +98,14 @@ function getUserInputSongTitleSearch(event) {
   var userInputSongTitleSearch = $("#titleinput").val().trim();
   console.log(userInputSongTitleSearch);
 
-  // if (!userInputArtistName) {
-  // insert modal here https://www.w3schools.com/howto/howto_css_modals.asp
-  // "Please enter a song title"
-  // }
+  if (!userInputSongTitleSearch) {
+    var modal = document.getElementById("modal");
+    console.log(modal);
+    var instance = M.Modal.init(modal);
+    console.log(instance);
+    instance.open();
+    return;
+  }
 
   // calls this function to execute the lastfm API call, giving it the user's input of song title
   lastfmAPICallSongTitleSearch(userInputSongTitleSearch);
@@ -172,19 +183,22 @@ titleButton.on("click", getUserInputSongTitleSearch);
 // merge all APIs on one js file here
 
 // function to give youtube API the lastfm artistTopSongs data (just the first song to retrieve a video)
-function lastfmAPIToYoutubeAPI (firstSong) {
+function lastfmAPIToYoutubeAPI(firstSong) {
   console.log(firstSong);
   // single variable for implementing into the youtube API
   // insert plus signs into the spaces
-  var firstArtistSongForYoutubeAPI = firstSong.toptracks.track[0].name.split(" ").join("+");
+  var firstArtistSongForYoutubeAPI = firstSong.toptracks.track[0].name
+    .split(" ")
+    .join("+");
   console.log(firstArtistSongForYoutubeAPI);
 }
 
 // function to give ticketmaster API the lastfm songTitleSearch data (just the first result's artst name to retrieve info about upcoming concerts)
-function lastfmAPIToTicketmasterAPI (firstArtist) {
+function lastfmAPIToTicketmasterAPI(firstArtist) {
   console.log(firstArtist);
   // single variable for implementing into the ticketmaster API
   // insert plus signs into the spaces
-  var firstArtistResultForTicketmasterAPI = firstArtist.results.trackmatches.track[13].artist.split(" ").join("+");
+  var firstArtistResultForTicketmasterAPI =
+    firstArtist.results.trackmatches.track[13].artist.split(" ").join("+");
   console.log(firstArtistResultForTicketmasterAPI);
 }
