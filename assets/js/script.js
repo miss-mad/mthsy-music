@@ -1,6 +1,6 @@
 // places everything in a function so that when the page is loaded, all of this executes
 document.addEventListener("DOMContentLoaded", function () {
-  // Materialize related resizing transformation
+  // Materialize-related resizing transformation
   $("#textarea1").val("New Text");
   M.textareaAutoResize($("#textarea1"));
 
@@ -32,15 +32,16 @@ document.addEventListener("DOMContentLoaded", function () {
   function saveSearchHistory(userInput, searchType) {
     var searchHistoryArray = [];
 
+    // if statements to help local storage differentiate between which item we're retrieving
     if (searchType === "artist") {
-      // gets the search input item from local storage
+      // gets the search input artist from local storage
       var localStorageUserInput = localStorage.getItem(
         "searchHistoryArtistArray"
       );
     }
 
     if (searchType === "songTitle") {
-      // gets the search input item from local storage
+      // gets the search input song title from local storage
       var localStorageUserInput = localStorage.getItem(
         "searchHistorySongTitleArray"
       );
@@ -81,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
     displaySearchHistory();
   }
 
-  // function to display the search history on the webpage
+  // function to build the search history on the webpage and display it
   function displaySearchHistory() {
     // clears the search history text
     document.getElementById("dropdown1").innerHTML = "";
@@ -89,12 +90,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // selects the html attribute with the matching ID and adds css - this is the search history display card
     var searchHistoryDropdown = $("#dropdown1");
 
-    // retrieves the array from local storage that shows the cities in search history
+    // retrieves the array from local storage that shows the artists in search history
     var localStorageArtistHistory = localStorage.getItem(
       "searchHistoryArtistArray"
     );
 
-    // gets the search input item from local storage
+    // retrieves the array from local storage that shows the song titles in search history
     var localStorageSongTitleHistory = localStorage.getItem(
       "searchHistorySongTitleArray"
     );
@@ -110,34 +111,50 @@ document.addEventListener("DOMContentLoaded", function () {
         ? []
         : JSON.parse(localStorageSongTitleHistory);
 
-    // JS forEach() method to loop through each input in the searchHistoryArray in local storage, add css, and add it to the search history dropdown
+    // forEach() method to loop through each input in the searchHistoryArray in local storage, add css, and add it to the search history dropdown
     localStorageArtistHistory.forEach(function (input) {
-
-      console.log(input)
-
-
-
+      console.log(input);
 
       var searchHistoryUserInputListItem = $("<li>");
       searchHistoryUserInputListItem.attr("value", input);
       searchHistoryUserInputListItem.text(input);
+
       // makes each search history list item clickable and listen for when the user clicks on any of them
       searchHistoryUserInputListItem.on("click", artistFunction);
       searchHistoryDropdown.append(searchHistoryUserInputListItem);
     });
 
-    // Append divider
+    // create and append divider to the dropdown
     var searchHistoryDropdown = $("#dropdown1");
     var divider = $("<li>");
     divider.css("class", "divider");
     divider.attr("tabindex", "-1");
+    divider.text("___________________");
     searchHistoryDropdown.append(divider);
+
+
+    // potentially add dividers with titles to categorize search history dropdown
+      // var dividerArtist = $("<li>");
+    // divider.css("class", "divider");
+    // divider.attr("tabindex", "-1");
+    // divider.text("Artist");
+    // searchHistoryDropdown.append(dividerArtist);
+
+    // var dividerMiddle = $("<li>");
+    // divider.css("class", "divider");
+    // divider.attr("tabindex", "-1");
+    // divider.text("___________________");
+    // searchHistoryDropdown.append(dividerMiddle);
+
+    // var dividerSongTitle = $("<li>");
+    // divider.css("class", "divider");
+    // divider.attr("tabindex", "-1");
+    // divider.text("Song Title");
+    // searchHistoryDropdown.append(dividerSongTitle);
 
     // JS forEach() method to loop through each input in the searchHistoryArray in local storage, add css, and add it to the search history dropdown
     localStorageSongTitleHistory.forEach(function (input) {
-      console.log(input)
-
-
+      console.log(input);
 
       var searchHistoryUserInputListItem = $("<li>");
       searchHistoryUserInputListItem.attr("value", input);
@@ -149,15 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  function songTitleFunction(event) {
-    console.log("Song title function")
-    console.log(event.target.innerHTML)
-    var songTitle = event.target.innerHTML
-
-    displayPastSearchedInput(songTitle, "songTitle")
-
-  }
-
+  // both artistFunction() and songTitleFunction() retrieve the innerHTML of their respective data (either artist or song title) so that it knows what to display. then, it calls the function below it to display the search history artist or song title results again.
   function artistFunction(event) {
     console.log("artistFunction function");
     console.log(event.target.innerHTML);
@@ -167,14 +176,25 @@ document.addEventListener("DOMContentLoaded", function () {
     displayPastSearchedInput(artist, "artist");
   }
 
+  // see above about artistFunction()
+  function songTitleFunction(event) {
+    console.log("Song title function");
+    console.log(event.target.innerHTML);
+    var songTitle = event.target.innerHTML;
+
+    displayPastSearchedInput(songTitle, "songTitle");
+  }
+
   // function to display the previously searched input in the dropdown list
   function displayPastSearchedInput(input, searchType) {
     console.log("displayPastSearchedInput", input, searchType);
+
+    // clear out previous results from the last time user clicked an item in the search history
     document.getElementById("lastFMInfo").innerHTML = "";
 
     // tells the computer which function to call in accordance to which search bar was used. if no input was given in one of the search bars, then don't display anything (return keyword tells it to stop doing stuff)
     if (searchType === "artist") {
-      console.log("ARTIST IS RUNNING");
+      console.log("ARTIST IS WORKING");
       lastfmAPICallArtistTopSongs(input);
     } else if (searchType === "songTitle") {
       console.log("TITLE IS RUNNING");
@@ -239,25 +259,22 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(function (data) {
         console.log("artist top songs: ", data);
         displayArtistTopSongs(data);
-        // lastfmAPIToYoutubeAPI(data);
+        lastfmAPIToYoutubeAPI(data);
       })
 
       // catches any errors the user might input and displays an error message
       .catch(function (error) {
         console.log("error from API: ", error);
-        // insert another modal here that says
-        // "ERROR - please make sure you have spelled the artist's name correctly"
       });
   }
 
   // function to display the top five songs of any given artist the user searched for
   function displayArtistTopSongs(data) {
     $("#artistinput").val("");
+    document.getElementById("lastFMInfo").innerHTML = "";
 
     var artistTopSongsDiv = $("#lastFMInfo");
-
     var artistTopSongsList = $("#lastFMInfo");
-    // artistTopSongsList.css("display", "flex");
 
     // for loop to loop through the first 5 songs in the given lastfm data and display them in a dynamically created div
     for (var i = 0; i < 5; i++) {
@@ -288,7 +305,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // calls this function to execute the lastfm API call, giving it the user's input of song title
     lastfmAPICallSongTitleSearch(userInputSongTitleSearch);
-    saveSearchHistory(userInputSongTitleSearch, "songTitle")
+    saveSearchHistory(userInputSongTitleSearch, "songTitle");
   }
 
   // function that uses the lastFM API via their track.search method
@@ -337,11 +354,11 @@ document.addEventListener("DOMContentLoaded", function () {
     var userInputSongTitleSearch = $("#titleinput").val().trim();
     $("#titleinput").val("");
     console.log(userInputSongTitleSearch);
+    document.getElementById("lastFMInfo").innerHTML = "";
 
     var songTitleSearchDiv = $("#lastFMInfo");
 
     var songTitleSearchList = $("#lastFMInfo");
-    // songTitleSearchList.css("display", "flex");
 
     // for loop to loop through the first 5 results in the given lastfm data and display them in a dynamically created div
     for (var i = 0; i < 5; i++) {
@@ -361,211 +378,211 @@ document.addEventListener("DOMContentLoaded", function () {
 
   displaySearchHistory();
 
-  // // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  // // merge all APIs on one js file here
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // merge Youtube and Ticketmaster APIs on one js file here
 
-  // // function to give youtube API the lastfm artistTopSongs data (just the first song to retrieve a video)
-  // function lastfmAPIToYoutubeAPI(firstSong) {
-  //   console.log(firstSong);
-  //   // single variable for implementing into the youtube API
-  //   // insert plus signs into the spaces
-  //   var firstArtistSongForYoutubeAPI = firstSong.toptracks.track[0].name
-  //     .split(" ")
-  //     .join("+");
-  //   console.log(firstArtistSongForYoutubeAPI);
-  //   YouTubeSearchByArtist(firstArtistSongForYoutubeAPI);
+  // function to give youtube API the lastfm artistTopSongs data (just the first song to retrieve a video)
+  function lastfmAPIToYoutubeAPI(firstSong) {
+    console.log(firstSong);
+    // single variable for implementing into the youtube API
+    // insert plus signs into the spaces
+    var firstArtistSongForYoutubeAPI = firstSong.toptracks.track[0].name
+      .split(" ")
+      .join("+");
+    console.log(firstArtistSongForYoutubeAPI);
+    YouTubeSearchByArtist(firstArtistSongForYoutubeAPI);
 
-  //   console.log(YouTubeSearchByArtist);
-  // }
+    console.log(YouTubeSearchByArtist);
+  }
 
-  // // function to give ticketmaster API the lastfm songTitleSearch data (just the first result's artst name to retrieve info about upcoming concerts)
-  // function lastfmAPIToTicketmasterAPI(firstArtist) {
-  //   console.log(firstArtist);
-  //   // single variable for implementing into the ticketmaster API
-  //   // insert plus signs into the spaces
-  //   var firstArtistResultForTicketmasterAPI =
-  //     firstArtist.results.trackmatches.track[0].artist.split(" ").join("+");
-  //   console.log(firstArtistResultForTicketmasterAPI);
-  //   Ticketmastersongtitle(firstArtistResultForTicketmasterAPI);
-  // }
+  // function to give ticketmaster API the lastfm songTitleSearch data (just the first result's artst name to retrieve info about upcoming concerts)
+  function lastfmAPIToTicketmasterAPI(firstArtist) {
+    console.log(firstArtist);
+    // single variable for implementing into the ticketmaster API
+    // insert plus signs into the spaces
+    var firstArtistResultForTicketmasterAPI =
+      firstArtist.results.trackmatches.track[0].artist.split(" ").join("+");
+    console.log(firstArtistResultForTicketmasterAPI);
+    Ticketmastersongtitle(firstArtistResultForTicketmasterAPI);
+  }
 
-  // //Hunter's API delete this comment later
-  // var searchButtonTitle = document.querySelector("#titlebuttons");
-  // var searchButtonArtist = document.querySelector("#artistbuttons");
+  //Hunter's Youtube API
+  var searchButtonTitle = document.querySelector("#titlebuttons");
+  var searchButtonArtist = document.querySelector("#artistbuttons");
 
-  // function YouTubeSearchByArtist(data) {
-  //   console.log(data);
-  //   const ytURL =
-  //     "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&videoSyndicated=true&videoEmbeddable=true&q=";
-  //   var ytAPIKey = "&key=AIzaSyCWnH7bNyWEB88X6WFI9tLPCGqPa9ueJBA";
+  function YouTubeSearchByArtist(data) {
+    console.log(data);
+    const ytURL =
+      "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&videoSyndicated=true&videoEmbeddable=true&q=";
+    var ytAPIKey = "&key=AIzaSyCWnH7bNyWEB88X6WFI9tLPCGqPa9ueJBA";
 
-  //   var VideoDisplay = document.querySelector("#YouTubeVideo");
-  //   var firstArtistSongForYoutubeAPI = data;
+    var VideoDisplay = document.querySelector("#YouTubeVideo");
+    var firstArtistSongForYoutubeAPI = data;
 
-  //   console.log(firstArtistSongForYoutubeAPI);
+    console.log(firstArtistSongForYoutubeAPI);
 
-  //   if ((VideoDisplay.style.display = "none")) {
-  //     VideoDisplay.style.display = "block";
-  //   }
+    if ((VideoDisplay.style.display = "none")) {
+      VideoDisplay.style.display = "block";
+    }
 
-  //   var fullYTURLPathArtist = ytURL + firstArtistSongForYoutubeAPI + ytAPIKey;
+    var fullYTURLPathArtist = ytURL + firstArtistSongForYoutubeAPI + ytAPIKey;
 
-  //   console.log(fullYTURLPathArtist);
+    console.log(fullYTURLPathArtist);
 
-  //   fetch(fullYTURLPathArtist)
-  //     .then(function (response) {
-  //       console.log(response);
-  //       if (response.status === 200) {
-  //         return response.json();
-  //       }
-  //       throw new Error(response.statusText);
-  //     })
-  //     .then(function (data) {
-  //       console.log(data.items[0].id.videoId);
+    fetch(fullYTURLPathArtist)
+      .then(function (response) {
+        console.log(response);
+        if (response.status === 200) {
+          return response.json();
+        }
+        throw new Error(response.statusText);
+      })
+      .then(function (data) {
+        console.log(data.items[0].id.videoId);
 
-  //       var UniqueVidId = data.items[0].id.videoId;
-  //       document.getElementById("YouTubeVideo").src =
-  //         "https://www.youtube.com/embed/" + UniqueVidId;
-  //     })
-  //     .catch(function (error) {
-  //       console.log("Error from API: ", error);
-  //     });
-  // }
+        var UniqueVidId = data.items[0].id.videoId;
+        document.getElementById("YouTubeVideo").src =
+          "https://www.youtube.com/embed/" + UniqueVidId;
+      })
+      .catch(function (error) {
+        console.log("Error from API: ", error);
+      });
+  }
 
-  // searchButtonArtist.addEventListener("click", YouTubeSearchByArtist);
+  searchButtonArtist.addEventListener("click", YouTubeSearchByArtist);
 
-  // searchButtonTitle.addEventListener("click", function YouTubeSearchByTitle() {
-  //   const ytURL =
-  //     "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&videoSyndicated=true&videoEmbeddable=true&q=";
-  //   var ytAPIKey = "&key=AIzaSyCWnH7bNyWEB88X6WFI9tLPCGqPa9ueJBA";
+  searchButtonTitle.addEventListener("click", function YouTubeSearchByTitle() {
+    const ytURL =
+      "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&videoSyndicated=true&videoEmbeddable=true&q=";
+    var ytAPIKey = "&key=AIzaSyCWnH7bNyWEB88X6WFI9tLPCGqPa9ueJBA";
 
-  //   var artistName = document.getElementById("artistinput").value;
-  //   var songName = document.getElementById("titleinput").value;
-  //   var VideoDisplay = document.querySelector("#YouTubeVideo");
+    var artistName = document.getElementById("artistinput").value;
+    var songName = document.getElementById("titleinput").value;
+    var VideoDisplay = document.querySelector("#YouTubeVideo");
 
-  //   if ((VideoDisplay.style.display = "none")) {
-  //     VideoDisplay.style.display = "block";
-  //   }
+    if ((VideoDisplay.style.display = "none")) {
+      VideoDisplay.style.display = "block";
+    }
 
-  //   urlFriendlyArtist = artistName.replace(/\s/g, "+");
-  //   urlFriendlySong = songName.replace(/\s/g, "+");
+    urlFriendlyArtist = artistName.replace(/\s/g, "+");
+    urlFriendlySong = songName.replace(/\s/g, "+");
 
-  //   var fullYTURLPathTitle = ytURL + songName + ytAPIKey;
+    var fullYTURLPathTitle = ytURL + songName + ytAPIKey;
 
-  //   console.log(fullYTURLPathTitle);
+    console.log(fullYTURLPathTitle);
 
-  //   fetch(fullYTURLPathTitle)
-  //     .then(function (response) {
-  //       console.log(response);
-  //       if (response.status === 200) {
-  //         return response.json();
-  //       }
-  //       throw new Error(response.statusText);
-  //     })
-  //     .then(function (data) {
-  //       console.log(data.items[0].id.videoId);
+    fetch(fullYTURLPathTitle)
+      .then(function (response) {
+        console.log(response);
+        if (response.status === 200) {
+          return response.json();
+        }
+        throw new Error(response.statusText);
+      })
+      .then(function (data) {
+        console.log(data.items[0].id.videoId);
 
-  //       var UniqueVidId = data.items[0].id.videoId;
-  //       document.getElementById("YouTubeVideo").src =
-  //         "https://www.youtube.com/embed/" + UniqueVidId;
-  //     })
-  //     .catch(function (error) {
-  //       console.log("Error from API: ", error);
-  //     });
-  // });
+        var UniqueVidId = data.items[0].id.videoId;
+        document.getElementById("YouTubeVideo").src =
+          "https://www.youtube.com/embed/" + UniqueVidId;
+      })
+      .catch(function (error) {
+        console.log("Error from API: ", error);
+      });
+  });
 
-  // //Ticketmaster API
-  // var artistsearch = document.getElementById("artistbuttons");
-  // var titlesearch = document.getElementById("titlebuttons");
-  // var concertdisplay = document.getElementById("concertevent");
-  // var concertdate = document.getElementById("concertdate");
-  // var concertname = document.getElementById("concertname");
-  // var venuename = document.getElementById("venuename");
-  // var concerturl = document.getElementById("concerturl");
+  //Ticketmaster API
+  var artistsearch = document.getElementById("artistbuttons");
+  var titlesearch = document.getElementById("titlebuttons");
+  var concertdisplay = document.getElementById("concertevent");
+  var concertdate = document.getElementById("concertdate");
+  var concertname = document.getElementById("concertname");
+  var venuename = document.getElementById("venuename");
+  var concerturl = document.getElementById("concerturl");
 
-  // function Ticketmaster() {
-  //   var TicketUrlSearch =
-  //     "https://app.ticketmaster.com/discovery/v2/events.json?keyword=";
-  //   var TicketUrlAPI = "&countryCode=US&apikey=";
-  //   var TicketAPIKey = "fa4oEMRMib4vxQg2FPdmxH9JKdFeSeaC";
-  //   var UserInput = document.getElementById("artistinput").value;
+  function Ticketmaster() {
+    var TicketUrlSearch =
+      "https://app.ticketmaster.com/discovery/v2/events.json?keyword=";
+    var TicketUrlAPI = "&countryCode=US&apikey=";
+    var TicketAPIKey = "fa4oEMRMib4vxQg2FPdmxH9JKdFeSeaC";
+    var UserInput = document.getElementById("artistinput").value;
 
-  //   var url = TicketUrlSearch + UserInput + TicketUrlAPI + TicketAPIKey;
+    var url = TicketUrlSearch + UserInput + TicketUrlAPI + TicketAPIKey;
 
-  //   fetch(url)
-  //     .then((response) => {
-  //       if (response.ok) {
-  //         return response.json();
-  //       }
-  //       throw new Error(response.statusText);
-  //     })
-  //     .then(function (data) {
-  //       console.log(data._embedded.events[0]);
-  //       console.log(data._embedded.events[0].name);
-  //       console.log(data._embedded.events[0].dates.start.localDate);
-  //       console.log(data._embedded.events[0].products[0].name);
-  //       console.log(data._embedded.events[0]._embedded.venues[0].name);
-  //       console.log(data._embedded.events[0].url);
+    fetch(url)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(response.statusText);
+      })
+      .then(function (data) {
+        console.log(data._embedded.events[0]);
+        console.log(data._embedded.events[0].name);
+        console.log(data._embedded.events[0].dates.start.localDate);
+        console.log(data._embedded.events[0].products[0].name);
+        console.log(data._embedded.events[0]._embedded.venues[0].name);
+        console.log(data._embedded.events[0].url);
 
-  //       var eventname = data._embedded.events[0].name;
-  //       var eventdate = data._embedded.events[0].dates.start.localDate;
-  //       var eventconcertname = data._embedded.events[0].products[0].name;
-  //       var placename = data._embedded.events[0]._embedded.venues[0].name;
-  //       var eventurl = data._embedded.events[0].url;
+        var eventname = data._embedded.events[0].name;
+        var eventdate = data._embedded.events[0].dates.start.localDate;
+        var eventconcertname = data._embedded.events[0].products[0].name;
+        var placename = data._embedded.events[0]._embedded.venues[0].name;
+        var eventurl = data._embedded.events[0].url;
 
-  //       concertdisplay.textContent += eventname;
-  //       concertdate.textContent += eventdate;
-  //       concertname.textContent += eventconcertname;
-  //       venuename.textContent += placename;
-  //       concerturl.textContent += eventurl;
-  //     })
-  //     .catch(function (error) {
-  //       console.log("Error: ", error);
-  //     });
-  // }
+        concertdisplay.textContent += eventname;
+        concertdate.textContent += eventdate;
+        concertname.textContent += eventconcertname;
+        venuename.textContent += placename;
+        concerturl.textContent += eventurl;
+      })
+      .catch(function (error) {
+        console.log("Error: ", error);
+      });
+  }
 
-  // artistsearch.addEventListener("click", Ticketmaster);
+  artistsearch.addEventListener("click", Ticketmaster);
 
-  // function Ticketmastersongtitle(data) {
-  //   var TicketUrlSearch =
-  //     "https://app.ticketmaster.com/discovery/v2/events.json?keyword=";
-  //   var TicketUrlAPI = "&countryCode=US&apikey=";
-  //   var TicketAPIKey = "fa4oEMRMib4vxQg2FPdmxH9JKdFeSeaC";
-  //   var UserInput = data;
+  function Ticketmastersongtitle(data) {
+    var TicketUrlSearch =
+      "https://app.ticketmaster.com/discovery/v2/events.json?keyword=";
+    var TicketUrlAPI = "&countryCode=US&apikey=";
+    var TicketAPIKey = "fa4oEMRMib4vxQg2FPdmxH9JKdFeSeaC";
+    var UserInput = data;
 
-  //   var url = TicketUrlSearch + UserInput + TicketUrlAPI + TicketAPIKey;
-  //   console.log(UserInput);
-  //   fetch(url)
-  //     .then((response) => {
-  //       if (response.ok) {
-  //         return response.json();
-  //       }
-  //       throw new Error(response.statusText);
-  //     })
-  //     .then(function (data) {
-  //       console.log(data._embedded.events[0]);
-  //       console.log(data._embedded.events[0].name);
-  //       console.log(data._embedded.events[0].dates.start.localDate);
-  //       console.log(data._embedded.events[0].products[0].name);
-  //       console.log(data._embedded.events[0]._embedded.venues[0].name);
-  //       console.log(data._embedded.events[0].url);
+    var url = TicketUrlSearch + UserInput + TicketUrlAPI + TicketAPIKey;
+    console.log(UserInput);
+    fetch(url)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(response.statusText);
+      })
+      .then(function (data) {
+        console.log(data._embedded.events[0]);
+        console.log(data._embedded.events[0].name);
+        console.log(data._embedded.events[0].dates.start.localDate);
+        console.log(data._embedded.events[0].products[0].name);
+        console.log(data._embedded.events[0]._embedded.venues[0].name);
+        console.log(data._embedded.events[0].url);
 
-  //       var eventname = data._embedded.events[0].name;
-  //       var eventdate = data._embedded.events[0].dates.start.localDate;
-  //       var eventconcertname = data._embedded.events[0].products[0].name;
-  //       var placename = data._embedded.events[0]._embedded.venues[0].name;
-  //       var eventurl = data._embedded.events[0].url;
+        var eventname = data._embedded.events[0].name;
+        var eventdate = data._embedded.events[0].dates.start.localDate;
+        var eventconcertname = data._embedded.events[0].products[0].name;
+        var placename = data._embedded.events[0]._embedded.venues[0].name;
+        var eventurl = data._embedded.events[0].url;
 
-  //       concertdisplay.textContent += eventname;
-  //       concertdate.textContent += eventdate;
-  //       concertname.textContent += eventconcertname;
-  //       venuename.textContent += placename;
-  //       concerturl.textContent += eventurl;
-  //     })
-  //     .catch(function (error) {
-  //       console.log("Error: ", error);
-  //     });
-  // }
+        concertdisplay.textContent += eventname;
+        concertdate.textContent += eventdate;
+        concertname.textContent += eventconcertname;
+        venuename.textContent += placename;
+        concerturl.textContent += eventurl;
+      })
+      .catch(function (error) {
+        console.log("Error: ", error);
+      });
+  }
 
-  // titlesearch.addEventListener("click", Ticketmastersongtitle);
+  titlesearch.addEventListener("click", Ticketmastersongtitle);
 });
