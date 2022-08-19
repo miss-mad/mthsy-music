@@ -96,14 +96,21 @@ label {
     font-weight: bold;
 }
 
-#songvideo {
+#songvideo 
+{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-
+iframe
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 #sticky {
   position: sticky;
