@@ -9,6 +9,7 @@ var artistModal = $(".artist-modal");
 var songTitleModal = $(".song-title-modal");
 var modalClose = $(".close");
 
+
 // function to retrieve the user input when they type an artist name
 function getUserInputArtistName(event) {
   // prevents default behavior of the button refreshing the page
