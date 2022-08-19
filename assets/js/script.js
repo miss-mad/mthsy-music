@@ -30,9 +30,6 @@ function getUserInputArtistName(event) {
 
   // calls this function to execute the lastfm API call, giving it the user's input of artist name
   lastfmAPICallArtistTopSongs(userInputArtistName);
-
-  // calls ticketmaster's function to execute that API call, giving it the user's input as well
-  Ticketmaster(userInputArtistName);
 }
 
 // function that uses the lastFM API via their artist.gettoptracks method
@@ -192,9 +189,7 @@ function lastfmAPIToYoutubeAPI(firstSong) {
   console.log(firstSong);
   // single variable for implementing into the youtube API
   // insert plus signs into the spaces
-  var firstArtistSongForYoutubeAPI = firstSong.toptracks.track[0].name
-    .split(" ")
-    .join("+");
+  var firstArtistSongForYoutubeAPI = firstSong.toptracks.track[0].name.split(" ").join("+");
   console.log(firstArtistSongForYoutubeAPI);
   YouTubeSearchByArtist(firstArtistSongForYoutubeAPI);
 
@@ -207,8 +202,9 @@ function lastfmAPIToTicketmasterAPI(firstArtist) {
   // single variable for implementing into the ticketmaster API
   // insert plus signs into the spaces
   var firstArtistResultForTicketmasterAPI =
-    firstArtist.results.trackmatches.track[13].artist.split(" ").join("+");
+    firstArtist.results.trackmatches.track[0].artist.split(" ").join("+");
   console.log(firstArtistResultForTicketmasterAPI);
+  Ticketmastersongtitle(firstArtistResultForTicketmasterAPI);
 }
 
 
@@ -223,8 +219,6 @@ function YouTubeSearchByArtist (data) {
     "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&videoSyndicated=true&videoEmbeddable=true&q=";
   var ytAPIKey = "&key=AIzaSyCWnH7bNyWEB88X6WFI9tLPCGqPa9ueJBA";
 
-  var artistName = document.getElementById("artistinput").value;
-  var songName = document.getElementById("titleinput").value;
   var VideoDisplay = document.querySelector("#YouTubeVideo")
   var firstArtistSongForYoutubeAPI = data
 
@@ -234,15 +228,9 @@ function YouTubeSearchByArtist (data) {
     VideoDisplay.style.display = "block"
   }
 
-  urlFriendlyArtist = artistName.replace(/\s/g, "+");
-  urlFriendlySong = songName.replace(/\s/g, "+");
-
-  
   var fullYTURLPathArtist = ytURL + firstArtistSongForYoutubeAPI + ytAPIKey;
 
   console.log(fullYTURLPathArtist);
-
-
 
   fetch(fullYTURLPathArtist)
     .then(function (response) {
@@ -309,6 +297,7 @@ searchButtonTitle.addEventListener("click", function YouTubeSearchByTitle () {
 
 //Ticketmaster API 
 var artistsearch = document.getElementById("artistbuttons");
+var titlesearch = document.getElementById("titlebuttons");
 var concertdisplay = document.getElementById("concertevent");
 var concertdate = document.getElementById("concertdate");
 var concertname = document.getElementById("concertname");
@@ -316,7 +305,7 @@ var venuename = document.getElementById("venuename");
 var concerturl = document.getElementById("concerturl");
 
 
-var Ticketmaster = function ()
+function Ticketmaster()
 {
 var TicketUrlSearch = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=";
 var TicketUrlAPI = "&countryCode=US&apikey=";
@@ -325,6 +314,52 @@ var UserInput = document.getElementById('artistinput').value;
 
 var url = TicketUrlSearch + UserInput + TicketUrlAPI + TicketAPIKey;
 
+    fetch(url)
+    .then(response => {
+        if(response.ok){
+            return response.json();
+        }
+        throw new Error(response.statusText);
+    })
+    .then(function(data)
+    {
+        console.log(data._embedded.events[0]);
+        console.log(data._embedded.events[0].name);
+        console.log(data._embedded.events[0].dates.start.localDate);
+        console.log(data._embedded.events[0].products[0].name);
+        console.log(data._embedded.events[0]._embedded.venues[0].name);
+        console.log(data._embedded.events[0].url);
+
+        var eventname = data._embedded.events[0].name;
+        var eventdate = data._embedded.events[0].dates.start.localDate;
+        var eventconcertname = data._embedded.events[0].products[0].name;
+        var placename = data._embedded.events[0]._embedded.venues[0].name;
+        var eventurl = data._embedded.events[0].url;
+
+        concertdisplay.textContent += eventname;
+        concertdate.textContent += eventdate;
+        concertname.textContent += eventconcertname;
+        venuename.textContent += placename;
+        concerturl.textContent += eventurl;
+    })
+    .catch(function(error)
+    {
+        console.log("Error: ",error);
+    })
+
+}
+
+artistsearch.addEventListener("click",Ticketmaster);
+
+function Ticketmastersongtitle(data)
+{
+var TicketUrlSearch = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=";
+var TicketUrlAPI = "&countryCode=US&apikey=";
+var TicketAPIKey = "fa4oEMRMib4vxQg2FPdmxH9JKdFeSeaC";
+var UserInput = data;
+
+var url = TicketUrlSearch + UserInput + TicketUrlAPI + TicketAPIKey;
+console.log(UserInput);
     fetch(url)
     .then(response => {
         if(response.ok){
@@ -361,9 +396,8 @@ var url = TicketUrlSearch + UserInput + TicketUrlAPI + TicketAPIKey;
         console.log("Error: ",error);
     })
 
-    
 }
 
-artistsearch.addEventListener("click",Ticketmaster);
+titlesearch.addEventListener("click",Ticketmastersongtitle);
 
 
