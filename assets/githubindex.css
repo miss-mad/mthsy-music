@@ -1,9 +1,10 @@
 
-
 body{
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
     margin-right: -20%;
+    background-image: linear-gradient(to bottom right, rgb(204, 104, 243),rgb(29, 245, 227));
+
  
 }
 
@@ -17,9 +18,11 @@ p,span{
 }
 
 img{
-    width: 50%;}
+    
+    width: 30%;}
 
 
-
-
+button{
+    width:50%;
+}
 

@@ -127,9 +127,10 @@ footer
 
 footer{
     text-align: center;
-    position:absolute;
-    bottom:0;
+    position:relative;
+    bottom:100;
     width:100%;
     height:60px;
     background:hotpink;
 }
+
