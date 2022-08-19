@@ -195,6 +195,9 @@ function lastfmAPIToYoutubeAPI(firstSong) {
     .split(" ")
     .join("+");
   console.log(firstArtistSongForYoutubeAPI);
+  YouTubeSearchByArtist(firstArtistSongForYoutubeAPI);
+
+  console.log(YouTubeSearchByArtist)
 }
 
 // function to give ticketmaster API the lastfm songTitleSearch data (just the first result's artst name to retrieve info about upcoming concerts)
@@ -212,7 +215,9 @@ function lastfmAPIToTicketmasterAPI(firstArtist) {
 var searchButtonTitle = document.querySelector("#titlebuttons");
 var searchButtonArtist = document.querySelector("#artistbuttons")
 
-searchButtonArtist.addEventListener("click", function () {
+
+function YouTubeSearchByArtist (data) {
+    console.log(data)
   const ytURL =
     "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&videoSyndicated=true&videoEmbeddable=true&q=";
   var ytAPIKey = "&key=AIzaSyCWnH7bNyWEB88X6WFI9tLPCGqPa9ueJBA";
@@ -220,6 +225,9 @@ searchButtonArtist.addEventListener("click", function () {
   var artistName = document.getElementById("artistinput").value;
   var songName = document.getElementById("titleinput").value;
   var VideoDisplay = document.querySelector("#YouTubeVideo")
+  var firstArtistSongForYoutubeAPI = data
+
+  console.log(firstArtistSongForYoutubeAPI)
 
   if(VideoDisplay.style.display = "none") {
     VideoDisplay.style.display = "block"
@@ -252,9 +260,11 @@ searchButtonArtist.addEventListener("click", function () {
     .catch(function(error){
         console.log("Error from API: ", error)
     });
-});
+};
 
-searchButtonTitle.addEventListener("click", function () {
+searchButtonArtist.addEventListener("click", YouTubeSearchByArtist) 
+
+searchButtonTitle.addEventListener("click", function YouTubeSearchByTitle () {
     const ytURL =
       "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&videoSyndicated=true&videoEmbeddable=true&q=";
     var ytAPIKey = "&key=AIzaSyCWnH7bNyWEB88X6WFI9tLPCGqPa9ueJBA";
