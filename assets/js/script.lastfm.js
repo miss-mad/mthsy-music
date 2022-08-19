@@ -1,171 +1,204 @@
-// attribute selectors to find the matching html classes for which we later add event listeners for when the user clicks these buttons
-var artistButton = $(".artistbutton");
-var titleButton = $(".titlebutton");
+// // attribute selectors to find the matching html classes for which we later add event listeners for when the user clicks these buttons
+// var artistButton = $(".artistbutton");
+// var titleButton = $(".titlebutton");
+// var artistModal = $(".artist-modal");
+// var songTitleModal = $(".song-title-modal");
+// var modalClose = $(".close");
 
-// function to retrieve the user input when they place
-function getUserInputArtistName(event) {
-  console.log("user input function is working");
-  event.preventDefault();
+// // function to retrieve the user input when they type an artist name
+// function getUserInputArtistName(event) {
+//   // prevents default behavior of the button refreshing the page
+//   event.preventDefault();
 
-  var userInputArtistName = $("#artistinput").val().trim();
-  console.log(userInputArtistName);
+//   // retrieve the user's input using a html id selector, then trims any extra white space
+//   var userInputArtistName = $("#artistinput").val().trim();
+//   console.log(userInputArtistName);
 
-  // if (!userInputArtistName) {
-  // insert modal here https://www.w3schools.com/howto/howto_css_modals.asp
-  // "Please enter an artist's name"
-  // }
+//   if (!userInputArtistName) {
+//     var modal = document.getElementById("modal");
+//     console.log(modal);
+//     var instance = M.Modal.init(modal);
+//     console.log(instance);
+//     instance.open();
+//     return;
+//   }
 
-  lastfmAPICallArtistTopSongs(userInputArtistName);
-}
+//   // calls this function to execute the lastfm API call, giving it the user's input of artist name
+//   lastfmAPICallArtistTopSongs(userInputArtistName);
 
-// artist top songs
-// https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&format=json&api_key=807f87e7dcc6c31a458c4ab1feb542c2&artist=coldplay
-// method
-// format
-// api key
-// artist
+//   // calls ticketmaster's function to execute that API call, giving it the user's input as well
+//   Ticketmaster(userInputArtistName);
+// }
 
-function lastfmAPICallArtistTopSongs(artist) {
-  console.log("artist top songs function is working");
+// // function that uses the lastFM API via their artist.gettoptracks method
+// function lastfmAPICallArtistTopSongs(artist) {
+//   // creates the queryURL, which is the baseURL appended to the query terms, to be used in the fetch API
+//   var baseURL =
+//     "https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&format=json";
 
-  var baseURL =
-    "https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&format=json";
+//   var lastfmAPIKey = "807f87e7dcc6c31a458c4ab1feb542c2";
+//   var parametersTopSongs = `&api_key=${lastfmAPIKey}&artist=${artist}`;
 
-  var lastfmAPIKey = "807f87e7dcc6c31a458c4ab1feb542c2";
-  var parametersTopSongs = `&api_key=${lastfmAPIKey}&artist=${artist}`;
+//   baseURL = baseURL + parametersTopSongs;
 
-  baseURL = baseURL + parametersTopSongs;
-  // "https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&format=json&api_key=807f87e7dcc6c31a458c4ab1feb542c2&artist=coldplay"
-  // https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&format=json&api_key=807f87e7dcc6c31a458c4ab1feb542c2&artist=coldplay
-  console.log(baseURL);
+//   var requestOptions = {
+//     method: "GET",
+//     redirect: "follow",
+//   };
 
-  var requestOptions = {
-    method: "GET",
-    redirect: "follow",
-  };
+//   // fetch API fetches the lastfm data to find the artist's top tracks
+//   fetch(baseURL, requestOptions)
+//     .then(function (response) {
+//       if (response.ok) {
+//         return response.json();
+//       }
+//       throw new Error(response.statusText);
+//     })
 
-  fetch(baseURL, requestOptions)
-    .then(function (response) {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error(response.statusText);
-    })
+//     // calls the displayArtistTopSongs() function so that that function will be able to use the lastfm data
+//     .then(function (data) {
+//       console.log("artist top songs: ", data);
+//       displayArtistTopSongs(data);
+//       lastfmAPIToYoutubeAPI(data);
+//     })
 
-    .then(function (data) {
-      console.log("artist top songs: ", data);
-      displayArtistTopSongs(data);
-    })
+//     // catches any errors the user might input and displays an error message
+//     .catch(function (error) {
+//       console.log("error from API: ", error);
+//       // insert another modal here that says
+//       // "ERROR - please make sure you have spelled the artist's name correctly"
+//     });
+// }
 
-    .catch(function (error) {
-      console.log("error from API: ", error);
-      // insert another modal here that says
-      // "ERROR - please make sure you have spelled the artist's name correctly"
-    });
-}
+// // function to display the top five songs of any given artist the user searched for
+// function displayArtistTopSongs(data) {
+//   var userInputArtistName = $("#artistinput").val().trim();
+//   $("#artistinput").val("");
 
-function displayArtistTopSongs(data) {
-  console.log("displayArtistTopSongs function is working");
-  var userInputArtistName = $("#artistinput").val().trim();
-  $("#artistinput").val("");
-  console.log(userInputArtistName);
+//   var artistTopSongsDiv = $("#displayinfo");
 
-  var artistTopSongsDiv = $("#displayinfo");
+//   var artistTopSongsList = $("#songsuggestion1");
+//   // artistTopSongsList.css("display", "flex");
 
-  var artistTopSongsList = $("#songsuggestion1");
-  // artistTopSongsList.css("display", "flex");
+//   // for loop to loop through the first 5 songs in the given lastfm data and display them in a dynamically created div
+//   for (var i = 0; i < 5; i++) {
+//     var topFiveTracks = data.toptracks.track[i].name;
+//     console.log(topFiveTracks);
+//     artistTopSongsList.append(topFiveTracks);
+//     artistTopSongsDiv.append(artistTopSongsList);
+//   }
+// }
 
-  for (var i = 0; i < 5; i++) {
-    var topFiveTracks = data.toptracks.track[i].name;
-    console.log(topFiveTracks);
-    artistTopSongsList.append(topFiveTracks);
-    artistTopSongsDiv.append(artistTopSongsList);
-  }
-}
+// // function to retrieve the user input when they type a song title
+// function getUserInputSongTitleSearch(event) {
+//   // prevents default behavior of the button refreshing the page
+//   event.preventDefault();
 
-function getUserInputSongTitleSearch(event) {
-  console.log("user input function is working");
-  event.preventDefault();
+//   // retrieve the user's input using a html id selector, then trims any extra white space
+//   var userInputSongTitleSearch = $("#titleinput").val().trim();
+//   console.log(userInputSongTitleSearch);
 
-  var userInputSongTitleSearch = $("#titleinput").val().trim();
-  console.log(userInputSongTitleSearch);
+//   if (!userInputSongTitleSearch) {
+//     var modal = document.getElementById("modal");
+//     console.log(modal);
+//     var instance = M.Modal.init(modal);
+//     console.log(instance);
+//     instance.open();
+//     return;
+//   }
 
-  // if (!userInputArtistName) {
-  // insert modal here https://www.w3schools.com/howto/howto_css_modals.asp
-  // "Please enter an artist's name"
-  // }
+//   // calls this function to execute the lastfm API call, giving it the user's input of song title
+//   lastfmAPICallSongTitleSearch(userInputSongTitleSearch);
+// }
 
-  lastfmAPICallSongTitleSearch(userInputSongTitleSearch);
-}
+// // function that uses the lastFM API via their track.search method
+// function lastfmAPICallSongTitleSearch(songTitle) {
+//   // creates the queryURL, which is the baseURL appended to the query terms, to be used in the fetch API
+//   var baseURL =
+//     "http://ws.audioscrobbler.com/2.0/?method=track.search&format=json";
 
-// song title search
-// http://ws.audioscrobbler.com/2.0/?method=track.search&format=json&api_key=807f87e7dcc6c31a458c4ab1feb542c2&track=yellow
-// method
-// format
-// api key
-// track
+//   var lastfmAPIKey = "807f87e7dcc6c31a458c4ab1feb542c2";
+//   var parametersSongTitleSearch = `&api_key=${lastfmAPIKey}&track=${songTitle}`;
 
-function lastfmAPICallSongTitleSearch(songTitle) {
-  console.log("song title search function is working");
+//   baseURL = baseURL + parametersSongTitleSearch;
+//   console.log(baseURL);
 
-  var baseURL =
-    "http://ws.audioscrobbler.com/2.0/?method=track.search&format=json";
+//   var requestOptions = {
+//     method: "GET",
+//     redirect: "follow",
+//   };
 
-  var lastfmAPIKey = "807f87e7dcc6c31a458c4ab1feb542c2";
-  var parametersSongTitleSearch = `&api_key=${lastfmAPIKey}&track=${songTitle}`;
+//   // fetch API fetches the lastfm data to find the song titles and artists
+//   fetch(baseURL, requestOptions)
+//     .then(function (response) {
+//       if (response.ok) {
+//         return response.json();
+//       }
+//       throw new Error(response.statusText);
+//     })
 
-  baseURL = baseURL + parametersSongTitleSearch;
-  console.log(baseURL);
+//     // calls the displaySongTitleSearch() function so that that function will be able to use the lastfm data
+//     .then(function (data) {
+//       console.log("song title search: ", data);
+//       displaySongTitleSearch(data);
+//       lastfmAPIToTicketmasterAPI(data);
+//     })
 
-  var requestOptions = {
-    method: "GET",
-    redirect: "follow",
-  };
+//     // catches any errors the user might input and displays an error message
+//     .catch(function (error) {
+//       console.log("error from API: ", error);
+//       // insert another modal here that says
+//       // "ERROR - please make sure you have spelled the song title correctly"
+//     });
+// }
 
-  fetch(baseURL, requestOptions)
-    .then(function (response) {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error(response.statusText);
-    })
+// // function to display the top five matching song + artist results of any given song title the user searched for
+// function displaySongTitleSearch(data) {
+//   var userInputSongTitleSearch = $("#titleinput").val().trim();
+//   $("#titleinput").val("");
+//   console.log(userInputSongTitleSearch);
 
-    .then(function (data) {
-      console.log("song title search: ", data);
-      displaySongTitleSearch(data);
-    })
+//   var songTitleSearchDiv = $("#displayinfo");
 
-    .catch(function (error) {
-      console.log("error from API: ", error);
-      // insert another modal here that says
-      // "ERROR - please make sure you have spelled the artist's name correctly"
-    });
-}
+//   var songTitleSearchList = $("#songsuggestion1");
+//   // songTitleSearchList.css("display", "flex");
 
-function displaySongTitleSearch(data) {
-  console.log("displaySongTitleSearch function is working");
-  var userInputSongTitleSearch = $("#titleinput").val().trim();
-  $("#titleinput").val("");
-  console.log(userInputSongTitleSearch);
+//   // for loop to loop through the first 5 results in the given lastfm data and display them in a dynamically created div
+//   for (var i = 0; i < 5; i++) {
+//     var songTitleNameTopFive = data.results.trackmatches.track[i].name;
+//     var songTitleArtistTopFive = data.results.trackmatches.track[i].artist;
+//     var resultsSongAndArtist =
+//       songTitleNameTopFive + " " + "by " + songTitleArtistTopFive;
+//     console.log(resultsSongAndArtist);
+//     songTitleSearchList.append(resultsSongAndArtist);
+//     songTitleSearchDiv.append(songTitleSearchList);
+//   }
+// }
 
-  var songTitleSearchDiv = $("#displayinfo");
+// // click listeners added to these two buttons so that all above functions execute when the user clicks "search"
+// artistButton.on("click", getUserInputArtistName);
+// titleButton.on("click", getUserInputSongTitleSearch);
 
-  var songTitleSearchList = $("#songsuggestion1");
-  // songTitleSearchList.css("display", "flex");
+// // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// // merge all APIs on one js file here
 
-  for (var i = 0; i < 5; i++) {
-    var songTitleNameTopFive = data.results.trackmatches.track[i].name;
-    var songTitleArtistTopFive = data.results.trackmatches.track[i].artist;
-    var resultsSongAndArtist =
-      songTitleNameTopFive + " " + "by " + songTitleArtistTopFive;
-    console.log(resultsSongAndArtist);
-    songTitleSearchList.append(resultsSongAndArtist);
-    songTitleSearchDiv.append(songTitleSearchList);
-  }
-}
+// // function to give youtube API the lastfm artistTopSongs data (just the first song to retrieve a video)
+// function lastfmAPIToYoutubeAPI(firstSong) {
+//   console.log(firstSong);
+//   // single variable for implementing into the youtube API
+//   // insert plus signs into the spaces
+//   var firstArtistSongForYoutubeAPI = firstSong.toptracks.track[0].name
+//     .split(" ")
+//     .join("+");
+//   console.log(firstArtistSongForYoutubeAPI);
+// }
 
-artistButton.on("click", getUserInputArtistName);
-
-titleButton.on("click", getUserInputSongTitleSearch);
-
-// single
+// // function to give ticketmaster API the lastfm songTitleSearch data (just the first result's artst name to retrieve info about upcoming concerts)
+// function lastfmAPIToTicketmasterAPI(firstArtist) {
+//   console.log(firstArtist);
+//   // single variable for implementing into the ticketmaster API
+//   // insert plus signs into the spaces
+//   var firstArtistResultForTicketmasterAPI =
+//     firstArtist.results.trackmatches.track[13].artist.split(" ").join("+");
+//   console.log(firstArtistResultForTicketmasterAPI);
+// }
