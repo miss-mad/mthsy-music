@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var artistButton = $(".artistbutton");
   var titleButton = $(".titlebutton");
 
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // section for search history and local storage
+
   // this dropdown handles and displays the user search history
   var dropdown = $(".dropdown-trigger");
   dropdown.on("click", handleDropdown);
@@ -111,6 +114,15 @@ document.addEventListener("DOMContentLoaded", function () {
         ? []
         : JSON.parse(localStorageSongTitleHistory);
 
+    // create and append a title for the artist to the dropdown
+        var dividerArtist = $("<li>");
+      dividerArtist.css("class", "divider");
+      dividerArtist.css("font-weight", "bold")
+      dividerArtist.css("text-align", "right")
+      dividerArtist.attr("tabindex", "-1");
+      dividerArtist.text("Artist");
+      searchHistoryDropdown.append(dividerArtist);
+
     // forEach() method to loop through each input in the searchHistoryArray in local storage, add css, and add it to the search history dropdown
     localStorageArtistHistory.forEach(function (input) {
       console.log(input);
@@ -124,33 +136,21 @@ document.addEventListener("DOMContentLoaded", function () {
       searchHistoryDropdown.append(searchHistoryUserInputListItem);
     });
 
-    // create and append divider to the dropdown
-    var searchHistoryDropdown = $("#dropdown1");
-    var divider = $("<li>");
-    divider.css("class", "divider");
-    divider.attr("tabindex", "-1");
-    divider.text("___________________");
-    searchHistoryDropdown.append(divider);
+    // create and append a divider to the dropdown
+    var dividerMiddle = $("<li>");
+    dividerMiddle.css("class", "divider");
+    dividerMiddle.attr("tabindex", "-1");
+    dividerMiddle.text("___________________");
+    searchHistoryDropdown.append(dividerMiddle);
 
-
-    // potentially add dividers with titles to categorize search history dropdown
-      // var dividerArtist = $("<li>");
-    // divider.css("class", "divider");
-    // divider.attr("tabindex", "-1");
-    // divider.text("Artist");
-    // searchHistoryDropdown.append(dividerArtist);
-
-    // var dividerMiddle = $("<li>");
-    // divider.css("class", "divider");
-    // divider.attr("tabindex", "-1");
-    // divider.text("___________________");
-    // searchHistoryDropdown.append(dividerMiddle);
-
-    // var dividerSongTitle = $("<li>");
-    // divider.css("class", "divider");
-    // divider.attr("tabindex", "-1");
-    // divider.text("Song Title");
-    // searchHistoryDropdown.append(dividerSongTitle);
+    // create and append a title for song title to the dropdown
+    var dividerSongTitle = $("<li>");
+    dividerSongTitle.css("class", "divider");
+    dividerSongTitle.css("font-weight", "bold")
+    dividerSongTitle.css("text-align", "right")
+    dividerSongTitle.attr("tabindex", "-1");
+    dividerSongTitle.text("Song Title");
+    searchHistoryDropdown.append(dividerSongTitle);
 
     // JS forEach() method to loop through each input in the searchHistoryArray in local storage, add css, and add it to the search history dropdown
     localStorageSongTitleHistory.forEach(function (input) {
@@ -196,13 +196,24 @@ document.addEventListener("DOMContentLoaded", function () {
     if (searchType === "artist") {
       console.log("ARTIST IS WORKING");
       lastfmAPICallArtistTopSongs(input);
+      // ARTIST ONLY
+      // goal is to display the same artist results as initial search, but this time we're displaying them when user clicks an artist in search history
+      // call the appropriate Youtube API function here and pass it the correct data
+      // call the appropriate Ticketmaster API function and pass it the correct data
     } else if (searchType === "songTitle") {
-      console.log("TITLE IS RUNNING");
+      console.log("SONG TITLE IS RUNNING");
       lastfmAPICallSongTitleSearch(input);
+      // SONG TITLE ONLY
+      // goal is to display the same sont title results as initial search, but this time we're displaying them when user clicks an artist in search history
+      // call the appropriate Youtube API function here and pass it the correct data
+      // call the appropriate Ticketmaster API function and pass it the correct data
     } else {
       return;
     }
   }
+
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // Madeleine's lastfm API
 
   // function to retrieve the user input when they type an artist name
   function getUserInputArtistName(event) {
@@ -379,6 +390,8 @@ document.addEventListener("DOMContentLoaded", function () {
   displaySearchHistory();
 
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  
+  // section to connect APIs
   // merge Youtube and Ticketmaster APIs on one js file here
 
   // function to give youtube API the lastfm artistTopSongs data (just the first song to retrieve a video)
@@ -406,7 +419,8 @@ document.addEventListener("DOMContentLoaded", function () {
     Ticketmastersongtitle(firstArtistResultForTicketmasterAPI);
   }
 
-  //Hunter's Youtube API
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // Hunter's Youtube API
   var searchButtonTitle = document.querySelector("#titlebuttons");
   var searchButtonArtist = document.querySelector("#artistbuttons");
 
@@ -491,7 +505,8 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 
-  //Ticketmaster API
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // Terry's Ticketmaster API
   var artistsearch = document.getElementById("artistbuttons");
   var titlesearch = document.getElementById("titlebuttons");
   var concertdisplay = document.getElementById("concertevent");
