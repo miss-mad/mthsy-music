@@ -12,7 +12,8 @@
   </head>
 
   <body>
-    <nav class="responsive-img"> <!--If i remove this, i can make the brand-logo text larger, but it repositions the About us. need a fix here.-->
+    <nav class="responsive-img">
+      <!--If i remove this, i can make the brand-logo text larger, but it repositions the About us. need a fix here.-->
       <div class="nav-wrapper">
         <a class="brand-logo">&emsp;IT'S MTHSY MUSIC!</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down navlist">
@@ -37,7 +38,11 @@
         style="display: flex; justify-content: center; align-items: center"
       >
         <!-- Dropdown Trigger -->
-        <a class="dropdown-trigger btn" href="#" data-target="dropdown1" id ="historybutton"
+        <a
+          class="dropdown-trigger btn"
+          href="#"
+          data-target="dropdown1"
+          id="historybutton"
           >Search History</a
         >
 
@@ -57,7 +62,22 @@
     </div>
 
     <section id="displayinfo">
-      <div id="lastFMInfo"></div>
+      <div id="lastFMInfo">
+        <div class="row">
+          <div class="col s12 m6">
+            <div id="lastfm-card">
+              <div id="lastfm-card-content">
+                <span id="lastfm-card-title"></span>
+                <p id="lastfm-card-list"></p>
+              </div>
+              <!-- <div class="card-action"> -->
+              <!-- <a href="#">This is a link</a> -->
+              <!-- <a href="#">This is a link</a> -->
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
       <ul style="list-style-type: none">
         <li id="songsuggestion1"></li>
         <li>

@@ -285,14 +285,29 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("lastFMInfo").innerHTML = "";
 
     var artistTopSongsDiv = $("#lastFMInfo");
-    var artistTopSongsList = $("#lastFMInfo");
+    var artistTopSongsCard = $("#lastfm-card");
+    artistTopSongsCard.attr("class", "card");
+    artistTopSongsCard.attr("class", "blue-grey");
+    artistTopSongsCard.attr("class", "darken-1");
+
+    var artistTopSongsCardContent = $("#lastfm-card-content");
+    artistTopSongsCardContent.attr("class", "card-content");
+    artistTopSongsCardContent.attr("class", "white-text");
+
+    var artistTopSongsTitle = $("#lastfm-card-title");
+    artistTopSongsTitle.text("Top 5 songs");
+
+    var artistTopSongsList = $("#lastfm-card-list");
+    // artistTopSongsList.text("I am a very simple card.");
 
     // for loop to loop through the first 5 songs in the given lastfm data and display them in a dynamically created div
     for (var i = 0; i < 5; i++) {
       var topFiveTracks = data.toptracks.track[i].name;
       console.log(topFiveTracks);
-      artistTopSongsList.append(topFiveTracks);
-      artistTopSongsDiv.append(artistTopSongsList);
+      artistTopSongsTitle.append(artistTopSongsList);
+      artistTopSongsCardContent.append(artistTopSongsTitle);
+      artistTopSongsCard.append(artistTopSongsCardContent);
+      artistTopSongsDiv.append(artistTopSongsCard);
     }
   }
 
