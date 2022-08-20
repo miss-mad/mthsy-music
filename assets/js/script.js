@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // attribute selectors to find the matching html classes for which we later add event listeners for when the user clicks these buttons
   var artistButton = $(".artistbutton");
   var titleButton = $(".titlebutton");
-
+  // var searchresults = "";
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   // section for search history and local storage
 
@@ -268,6 +268,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // calls the displayArtistTopSongs() function so that that function will be able to use the lastfm data
       .then(function (data) {
+        // searchresults += data;
         console.log("artist top songs: ", data);
         displayArtistTopSongs(data);
         lastfmAPIToYoutubeAPI(data);
@@ -516,6 +517,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var concerturl = document.getElementById("concerturl");
 
   function Ticketmaster() {
+    clearinterval();
     var TicketUrlSearch =
       "https://app.ticketmaster.com/discovery/v2/events.json?keyword=";
     var TicketUrlAPI = "&countryCode=US&apikey=";
@@ -561,6 +563,7 @@ document.addEventListener("DOMContentLoaded", function () {
   artistsearch.addEventListener("click", Ticketmaster);
 
   function Ticketmastersongtitle(data) {
+    clearinterval();
     var TicketUrlSearch =
       "https://app.ticketmaster.com/discovery/v2/events.json?keyword=";
     var TicketUrlAPI = "&countryCode=US&apikey=";
@@ -600,6 +603,14 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Error: ", error);
       });
   }
+  function clearinterval()
+  {
+    concertdisplay.textContent = "";
+    concertdate.textContent = "";
+    concertname.textContent = "";
+    venuename.textContent = "";
+    concerturl.textContent = "";
 
+  };
   titlesearch.addEventListener("click", Ticketmastersongtitle);
 });
