@@ -12,9 +12,9 @@
   </head>
 
   <body>
-    <nav class="responsive-img">
+    <nav class="responsive-img"> <!--If i remove this, i can make the brand-logo text larger, but it repositions the About us. need a fix here.-->
       <div class="nav-wrapper">
-        <a class="brand-logo">&nbsp;IT'S MTHSY MUSIC!</a>
+        <a class="brand-logo">&emsp;IT'S MTHSY MUSIC!</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down navlist">
           <li>
             <a href="./assets/githubindex.html" class="aboutme">About Us</a>
@@ -37,7 +37,7 @@
         style="display: flex; justify-content: center; align-items: center"
       >
         <!-- Dropdown Trigger -->
-        <a class="dropdown-trigger btn" href="#" data-target="dropdown1"
+        <a class="dropdown-trigger btn" href="#" data-target="dropdown1" id ="historybutton"
           >Search History</a
         >
 
@@ -65,7 +65,7 @@
             id="YouTubeVideo"
             style="display: none"
             height="400"
-            width="50%"
+            width="100%"
           >
           </iframe>
         </li>
@@ -73,7 +73,7 @@
         <li id="concertdate"></li>
         <li id="concertname"></li>
         <li id="venuename"></li>
-        <li id="concerturl"></li>
+        <a href><li id="concerturl"></li></a>
       </ul>
     </section>
 

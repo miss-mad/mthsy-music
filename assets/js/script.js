@@ -549,7 +549,9 @@ document.addEventListener("DOMContentLoaded", function () {
         concertdate.textContent += eventdate;
         concertname.textContent += eventconcertname;
         venuename.textContent += placename;
+        // document.getElementById('concerturl').setAttribute('href', eventurl);
         concerturl.textContent += eventurl;
+
       })
       .catch(function (error) {
         console.log("Error: ", error);
