@@ -31,10 +31,18 @@ img{
 
 
 button{
-    width:75%;
+    width:50%;
+
+}
+
+.card-panel{
+    height: 315.25px !important;
 }
 
 @media screen and (max-width: 800px){
+    html{
+        background-size: cover;
+    }
     .row{
         display: flex;
         flex-wrap: wrap;

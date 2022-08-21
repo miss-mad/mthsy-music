@@ -1,3 +1,7 @@
+$(document).ready(function(){
+    $('.sidebar').sidenav();
+});
+
 // places everything in a function so that when the page is loaded, all of this executes
 document.addEventListener("DOMContentLoaded", function () {
   // Materialize-related resizing transformation
@@ -482,7 +486,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-
 //   searchButtonArtist.addEventListener("click", YouTubeSearchByArtist);
 
   searchButtonTitle.addEventListener("click", function YouTubeSearchByTitle() {
@@ -573,7 +576,6 @@ document.addEventListener("DOMContentLoaded", function () {
         concertname.textContent += eventconcertname;
         venuename.textContent += placename;
         concerturl.textContent += eventurl;
-
 
         //adding href specifically for the event's url
         document.getElementById("concerturl").setAttribute('href',eventurl);
