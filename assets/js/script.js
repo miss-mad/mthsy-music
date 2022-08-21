@@ -645,3 +645,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   };
 });
+
+//button trigger upon pressing enter
+var enter = document.getElementById("artistinput");
+
+enter.addEventListener("keypress", function(event){
+  if(event.key === "Enter")
+  {
+    event.preventDefault();
+    document.getElementById("artistbuttons").click();
+  }
+})
+
+var enter = document.getElementById("titleinput");
+
+enter.addEventListener("keypress", function(event){
+  if(event.key === "Enter")
+  {
+    event.preventDefault();
+    document.getElementById("titlebuttons").click();
+  }
+})
