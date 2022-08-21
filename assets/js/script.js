@@ -1,4 +1,4 @@
-  $(document).ready(function(){
+$(document).ready(function(){
     $('.sidenav').sidenav();
   });
 
@@ -640,3 +640,24 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   titlesearch.addEventListener("click", Ticketmastersongtitle);
 });
+
+//button trigger upon pressing enter
+var enter = document.getElementById("artistinput");
+
+enter.addEventListener("keypress", function(event){
+  if(event.key === "Enter")
+  {
+    event.preventDefault();
+    document.getElementById("artistbuttons").click();
+  }
+})
+
+var enter = document.getElementById("titleinput");
+
+enter.addEventListener("keypress", function(event){
+  if(event.key === "Enter")
+  {
+    event.preventDefault();
+    document.getElementById("titlebuttons").click();
+  }
+})
