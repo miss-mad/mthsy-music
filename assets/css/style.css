@@ -11,14 +11,16 @@ html {
 
 body{
   height: 100%;
+  max-width: 100%;
 }
 
-nav{
+nav {
     background-color: transparent;
-    border-bottom: none !important;
+    
     box-shadow: none !important;
     margin-bottom: 20px;
     margin-top: 20px;
+    height: 150px;
 }
 
 .aboutme {
@@ -29,8 +31,8 @@ nav{
   border-radius: 10px;
 }
 
-.brand-logo {
-  font-size: 85px !important;
+#brand-logo {
+  font-size: 5rem !important;
   background-image: -webkit-linear-gradient(
     rgb(252, 188, 236),
     rgb(198, 177, 187)
@@ -65,7 +67,7 @@ button:hover{
   justify-content: center;
   color: black;
   background-color: peachpuff;
-
+  font-size: 1rem;
 
 }
 
@@ -128,6 +130,7 @@ label {
   list-style: none;
   font-size: 30px;
   text-align: right;
+  border: black;
 }
 
 #songvideo 
@@ -148,7 +151,7 @@ footer{
     font-weight: bold;
 }
 
-@media screen and (max-width: 475px) {
+@media screen and (min-width: 0) {
   .materialize-input{
     display: flex;
     flex-direction: wrap;

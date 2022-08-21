@@ -12,10 +12,10 @@
   </head>
 
   <body>
-    <nav class="responsive-img flow-text"> <!--If i remove this, i can make the brand-logo text larger, but it repositions the About us. need a fix here. -->
+    <nav> <!--If i remove this, i can make the brand-logo text larger, but it repositions the About us. need a fix here. -->
       <div class="nav-wrapper">
-        <a class="brand-logo">&emsp;IT'S MTHSY MUSIC!</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down navlist">
+        <a id="brand-logo" class="brand-logo">&emsp;IT'S MTHSY MUSIC!</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li>
             <a href="./assets/githubindex.html" class="aboutme">About Us</a>
           </li>
@@ -26,16 +26,15 @@
     <br>
     <div
       class="row"
-      style="display: flex; justify-content: center; align-items: center"
+      
     >
-      <div class="input-field col s4" style="display: flex">
+      <div class="input-field col s4">
         <input id="artistinput" class="materialize-input" type="text" />
         <label id="textarea1" for="artistinput">Find an artist!</label>
         <button id="artistbuttons" class="btn artistbutton">Search!</button>
       </div>
       <div
         class="col s4"
-        style="display: flex; justify-content: center; align-items: center"
       >
         <!-- Dropdown Trigger -->
         <a class="dropdown-trigger btn" href="#" data-target="dropdown1" id ="historybutton"
@@ -50,7 +49,7 @@
           <!-- <li>artist one</li>  -->
         </ul>
       </div>
-      <div class="input-field col s4" style="display: flex">
+      <div class="input-field col s4" >
         <input id="titleinput" class="materialize-textarea" type="text" />
         <label id="textarea1" for="titleinput">Find a song title!</label>
         <button id="titlebuttons" class="btn titlebutton">Search!</button>
