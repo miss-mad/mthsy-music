@@ -22,23 +22,24 @@
         </ul>
       </div>
     </nav>
-    <div></div>
+    <br>
+    <br>
     <br>
     <div
+      id="main-content"
       class="row"
-      
     >
-      <div class="input-field col s4">
+      <div class="input-field col s12 m5">
         <input id="artistinput" class="materialize-input" type="text" />
         <label id="textarea1" for="artistinput">Find an artist!</label>
         <button id="artistbuttons" class="btn artistbutton">Search!</button>
       </div>
       <div
-        class="col s4"
+        class="col s12 m2"
       >
         <!-- Dropdown Trigger -->
-        <a class="dropdown-trigger btn" href="#" data-target="dropdown1" id ="historybutton"
-          >Search History</a
+        <button class="dropdown-trigger btn" href="#" data-target="dropdown1"
+          >🔎</button
         >
 
         <!-- Dropdown Structure -->
@@ -49,7 +50,7 @@
           <!-- <li>artist one</li>  -->
         </ul>
       </div>
-      <div class="input-field col s4" >
+      <div class="input-field col s12 m5" >
         <input id="titleinput" class="materialize-textarea" type="text" />
         <label id="textarea1" for="titleinput">Find a song title!</label>
         <button id="titlebuttons" class="btn titlebutton">Search!</button>
@@ -58,7 +59,7 @@
 
     <section class="container" id="displayinfo">
       <div class="row">
-      <div class="col s6" id="lastFMInfo"></div>
+      <div class="card-panel pink lighten-5 col s6" id="lastFMInfo"></div>
       <ul class="col s6" style="list-style-type: none">
         <li id="songsuggestion1"></li>
         <li class="video-container">
@@ -66,7 +67,7 @@
             
             id="YouTubeVideo"
             style="display: none"
-            height="400"
+            height="500"
             width="100%"
           >
           </iframe>
@@ -78,7 +79,7 @@
         <li id="concertdate"></li>
         <li id="concertname"></li>
         <li id="venuename"></li>
-        <a href><li id="concerturl"></li></a>
+        <a li id="concerturl"></a>
       </ul>
     </section>
 
