@@ -340,7 +340,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function lastfmAPICallSongTitleSearch(songTitle) {
     // creates the queryURL, which is the baseURL appended to the query terms, to be used in the fetch API
     var baseURL =
-      "http://ws.audioscrobbler.com/2.0/?method=track.search&format=json";
+      "https://ws.audioscrobbler.com/2.0/?method=track.search&format=json";
 
     var lastfmAPIKey = "807f87e7dcc6c31a458c4ab1feb542c2";
     var parametersSongTitleSearch = `&api_key=${lastfmAPIKey}&track=${songTitle}`;
