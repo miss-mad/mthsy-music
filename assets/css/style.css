@@ -1,28 +1,41 @@
 html {
+  
   background:url(../images/backgroud.PNG);/*Added this to change background, can edit with this*/
   background-repeat: no-repeat; /*Added this to change background, can edit with this*/
   background-size: 2560px 1762px;/*Added this to change background, can edit with this*/
   min-height: 100%;
   font-family: sans-serif, "Times New Roman", Times, serif;
+  position: relative;
+  padding-bottom: 50px;
 }
 
-nav{
+body{
+  height: 100%;
+  max-width: 100%;
+}
+
+nav {
     background-color: transparent;
     border-bottom: none !important;
     box-shadow: none !important;
+    margin-bottom: 140px;
+    margin-top: 20px;
 }
 
 .aboutme {
   color: black;
   font-weight: bold;
   font-size: large;
+  background-color: peachpuff;
+  border-radius: 10px;
+  margin-right: 20px;
 }
 
-.brand-logo {
-  /*font-size: 75px;*/
+#brand-logo {
+  font-size: 5rem !important;
   background-image: -webkit-linear-gradient(
-    rgb(242, 239, 245),
-    rgb(138, 208, 255)
+    rgb(252, 188, 236),
+    rgb(198, 177, 187)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -34,7 +47,17 @@ button {
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
-  background:url(../images/backgroud.PNG); /*Added this to change button color, can edit with this*/
+  background-color: peachpuff;
+  text-align: center;
+  
+}
+
+.btn:hover{
+  background-color: rgb(241, 161, 91);
+}
+
+button:hover{
+  background-color: rgb(241, 161, 91);
 
 }
 
@@ -43,14 +66,10 @@ button {
   font-weight: bold;
   display: block;
   justify-content: center;
-  background:url(../images/backgroud.PNG);/*Added this to change background, can edit with this*/
-
+  color: black;
+  background-color: peachpuff;
 }
 
-
-#generate {
-  background-color: hotpink;
-}
 
 textarea {
   text-align: center;
@@ -66,6 +85,7 @@ textarea {
     box-shadow: 0px 1px 0px 0px white !important;
 }
 
+
 label {
   font-weight: bold !important;
   color: black !important;
@@ -74,12 +94,7 @@ label {
 
 
 #displayinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-weight: bold;
-
 }
 
 
@@ -96,6 +111,13 @@ label {
     color: blue;
 }
 
+#lastFMInfo {
+  list-style: none;
+  font-size: 25px;
+  text-align: left;
+  box-shadow: none !important;
+}
+
 #songvideo 
 {
   display: flex;
@@ -108,9 +130,8 @@ label {
 footer{
     text-align: center;
     position:absolute;
-    bottom:0%;
+    bottom:0;
+    height: 50px;
     width:100%;
-    height:60px;
     font-weight: bold;
 }
-

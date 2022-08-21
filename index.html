@@ -12,39 +12,37 @@
   </head>
 
   <body>
-    <nav class="responsive-img">
-      <!--If i remove this, i can make the brand-logo text larger, but it repositions the About us. need a fix here.-->
+    <nav> <!--If i remove this, i can make the brand-logo text larger, but it repositions the About us. need a fix here. -->
       <div class="nav-wrapper">
-        <a class="brand-logo">&emsp;IT'S MTHSY MUSIC!</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down navlist">
+        <a id="brand-logo" class="brand-logo">&emsp;IT'S MTHSY MUSIC!</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li>
             <a href="./assets/githubindex.html" class="aboutme">About Us</a>
           </li>
         </ul>
       </div>
     </nav>
-
+    <br>
+    <br>
+    <br>
     <div
+      id="main-content"
       class="row"
-      style="display: flex; justify-content: center; align-items: center"
     >
-      <div class="input-field col s4" style="display: flex">
+      <div class="input-field col s12 m5">
         <input id="artistinput" class="materialize-input" type="text" />
         <label id="textarea1" for="artistinput">Find an artist!</label>
         <button id="artistbuttons" class="btn artistbutton">Search!</button>
       </div>
       <div
-        class="col s4"
-        style="display: flex; justify-content: center; align-items: center"
+        class="col s12 m2"
       >
         <!-- Dropdown Trigger -->
-        <a
-          class="dropdown-trigger btn"
-          href="#"
-          data-target="dropdown1"
-          id="historybutton"
-          >Search History</a
+
+        <button class="dropdown-trigger btn" id="historybutton" href="#" data-target="dropdown1"
+          >🔎</button
         >
+
 
         <!-- Dropdown Structure -->
         <ul id="dropdown1" class="dropdown-content">
@@ -54,46 +52,36 @@
           <!-- <li>artist one</li>  -->
         </ul>
       </div>
-      <div class="input-field col s4" style="display: flex">
+      <div class="input-field col s12 m5" >
         <input id="titleinput" class="materialize-textarea" type="text" />
         <label id="textarea1" for="titleinput">Find a song title!</label>
         <button id="titlebuttons" class="btn titlebutton">Search!</button>
       </div>
     </div>
 
-    <section id="displayinfo">
-      <div id="lastFMInfo">
-        <div class="row">
-          <div class="col s12 m6">
-            <div id="lastfm-card">
-              <div id="lastfm-card-content">
-                <span id="lastfm-card-title"></span>
-                <p id="lastfm-card-list"></p>
-              </div>
-              <!-- <div class="card-action"> -->
-              <!-- <a href="#">This is a link</a> -->
-              <!-- <a href="#">This is a link</a> -->
-              <!-- </div> -->
-            </div>
-          </div>
-        </div>
-      </div>
-      <ul style="list-style-type: none">
+    <section class="container" id="displayinfo">
+      <div class="row">
+      <div class="card-panel pink lighten-5 col s6" id="lastFMInfo"></div>
+      <ul class="col s6" style="list-style-type: none">
         <li id="songsuggestion1"></li>
-        <li>
+        <li class="video-container">
           <iframe
+            
             id="YouTubeVideo"
             style="display: none"
-            height="400"
+            height="500"
             width="100%"
           >
           </iframe>
         </li>
+      </ul>
+      </div>
+      <ul>
         <li id="concertevent"></li>
         <li id="concertdate"></li>
         <li id="concertname"></li>
         <li id="venuename"></li>
-        <a href><li id="concerturl"></li></a>
+        <a li id="concerturl"></a>
       </ul>
     </section>
 
