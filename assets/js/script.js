@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var dividerArtist = $("<li>");
       dividerArtist.css("class", "divider");
       dividerArtist.css("font-weight", "bold")
-      dividerArtist.css("text-align", "right")
+      dividerArtist.css("text-align", "center")
       dividerArtist.attr("tabindex", "-1");
       dividerArtist.text("Artist");
       searchHistoryDropdown.append(dividerArtist);
@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var dividerSongTitle = $("<li>");
     dividerSongTitle.css("class", "divider");
     dividerSongTitle.css("font-weight", "bold")
-    dividerSongTitle.css("text-align", "right")
+    dividerSongTitle.css("text-align", "center")
     dividerSongTitle.attr("tabindex", "-1");
     dividerSongTitle.text("Song Title");
     searchHistoryDropdown.append(dividerSongTitle);
