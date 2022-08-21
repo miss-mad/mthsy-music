@@ -287,13 +287,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var artistTopSongsDiv = $("#lastFMInfo");
     var artistTopSongsList = $("#lastFMInfo");
+    // document.getElementById("#lastFMInfo").appendText("Top 5")
 
     // for loop to loop through the first 5 songs in the given lastfm data and display them in a dynamically created div
     for (var i = 0; i < 5; i++) {
-      var topFiveTracks = data.toptracks.track[i].name;
+      
+      var topFiveTracks = "<li>" + data.toptracks.track[i].name + "</li>";
       console.log(topFiveTracks);
       artistTopSongsList.append(topFiveTracks);
       artistTopSongsDiv.append(artistTopSongsList);
+    //   document.getElementById("#lastFMInfo").setAttribute("li")
     }
   }
 
