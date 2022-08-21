@@ -12,10 +12,13 @@ html {
 body{
   height: 100%;
 }
+
 nav{
     background-color: transparent;
     border-bottom: none !important;
     box-shadow: none !important;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .aboutme {
@@ -27,11 +30,10 @@ nav{
 }
 
 .brand-logo {
-  font-size: 75px !important;
-  margin-top: 10px;
+  font-size: 85px !important;
   background-image: -webkit-linear-gradient(
-    rgb(242, 239, 245),
-    rgb(138, 208, 255)
+    rgb(252, 188, 236),
+    rgb(198, 177, 187)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -68,9 +70,10 @@ button:hover{
 }
 
 
-#generate {
+/* Noted this out because it is an old ID that no longer exists
+ #generate {
   background-color: hotpink;
-}
+} */
 
 textarea {
   text-align: center;
@@ -98,13 +101,14 @@ label {
 
 
 #displayinfo {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   font-weight: bold;
-
 }
+
+
 
 
 #concertevent, #concertdate, #concertname, #venuename, #concerturl
@@ -118,6 +122,12 @@ label {
 
 #concerturl {
     color: blue;
+}
+
+#lastFMInfo {
+  list-style: none;
+  font-size: 30px;
+  text-align: right;
 }
 
 #songvideo 
@@ -138,3 +148,10 @@ footer{
     font-weight: bold;
 }
 
+@media screen and (max-width: 475px) {
+  .materialize-input{
+    display: flex;
+    flex-direction: wrap;
+  }
+
+}

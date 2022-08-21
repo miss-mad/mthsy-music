@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <nav class="responsive-img"> <!--If i remove this, i can make the brand-logo text larger, but it repositions the About us. need a fix here. -->
+    <nav class="responsive-img flow-text"> <!--If i remove this, i can make the brand-logo text larger, but it repositions the About us. need a fix here. -->
       <div class="nav-wrapper">
         <a class="brand-logo">&emsp;IT'S MTHSY MUSIC!</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down navlist">
@@ -57,12 +57,14 @@
       </div>
     </div>
 
-    <section id="displayinfo">
-      <div id="lastFMInfo"></div>
-      <ul style="list-style-type: none">
+    <section class="container" id="displayinfo">
+      <div class="row">
+      <div class="col s6" id="lastFMInfo"></div>
+      <ul class="col s6" style="list-style-type: none">
         <li id="songsuggestion1"></li>
-        <li>
+        <li class="video-container">
           <iframe
+            
             id="YouTubeVideo"
             style="display: none"
             height="400"
@@ -70,6 +72,9 @@
           >
           </iframe>
         </li>
+      </ul>
+      </div>
+      <ul>
         <li id="concertevent"></li>
         <li id="concertdate"></li>
         <li id="concertname"></li>
