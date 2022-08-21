@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // attribute selectors to find the matching html classes for which we later add event listeners for when the user clicks these buttons
   var artistButton = $(".artistbutton");
   var titleButton = $(".titlebutton");
-  // var searchresults = "";
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   // section for search history and local storage
 
@@ -115,10 +114,10 @@ document.addEventListener("DOMContentLoaded", function () {
         : JSON.parse(localStorageSongTitleHistory);
 
     // create and append a title for the artist to the dropdown
-        var dividerArtist = $("<li>");
+      var dividerArtist = $("<li>");
       dividerArtist.css("class", "divider");
       dividerArtist.css("font-weight", "bold")
-      dividerArtist.css("text-align", "right")
+      dividerArtist.css("text-align", "center")
       dividerArtist.attr("tabindex", "-1");
       dividerArtist.text("Artist");
       searchHistoryDropdown.append(dividerArtist);
@@ -147,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var dividerSongTitle = $("<li>");
     dividerSongTitle.css("class", "divider");
     dividerSongTitle.css("font-weight", "bold")
-    dividerSongTitle.css("text-align", "right")
+    dividerSongTitle.css("text-align", "center")
     dividerSongTitle.attr("tabindex", "-1");
     dividerSongTitle.text("Song Title");
     searchHistoryDropdown.append(dividerSongTitle);
@@ -268,8 +267,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // calls the displayArtistTopSongs() function so that that function will be able to use the lastfm data
       .then(function (data) {
+
         // searchresults += data;
         // console.log("artist top songs: ", data);
+
         displayArtistTopSongs(data);
         lastfmAPIToYoutubeAPI(data);
       })
@@ -287,10 +288,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var artistTopSongsDiv = $("#lastFMInfo");
     var artistTopSongsList = $("#lastFMInfo");
-    // document.getElementById("#lastFMInfo").appendText("Top 5")
 
     // for loop to loop through the first 5 songs in the given lastfm data and display them in a dynamically created div
     for (var i = 0; i < 5; i++) {
+
       if (i===0) {
     var topFiveTracks = "<li>" + "Top 5 Songs: <br> <br>" + data.toptracks.track[i].name + "</li>";
     //   console.log(topFiveTracks);
@@ -303,7 +304,8 @@ document.addEventListener("DOMContentLoaded", function () {
       artistTopSongsList.append(topFiveTracks);
       artistTopSongsDiv.append(artistTopSongsList);
       }
-    //   document.getElementById("#lastFMInfo").setAttribute("li")
+
+
     }
   }
 
@@ -386,11 +388,18 @@ document.addEventListener("DOMContentLoaded", function () {
     for (var i = 0; i < 5; i++) {
       var songTitleNameTopFive = data.results.trackmatches.track[i].name;
       var songTitleArtistTopFive = data.results.trackmatches.track[i].artist;
-      var resultsSongAndArtist =
-        songTitleNameTopFive + " " + "by " + songTitleArtistTopFive;
+      if(i===0){
+      var resultsSongAndArtist = "<li>" + "Top 5 Songs: <br>" + songTitleNameTopFive + " " + "by " + songTitleArtistTopFive + "</li>";
       console.log(resultsSongAndArtist);
       songTitleSearchList.append(resultsSongAndArtist);
       songTitleSearchDiv.append(songTitleSearchList);
+    }
+    else{
+      var resultsSongAndArtist = "<li>" + songTitleNameTopFive + " " + "by " + songTitleArtistTopFive + "</li>";
+      console.log(resultsSongAndArtist);
+      songTitleSearchList.append(resultsSongAndArtist);
+      songTitleSearchDiv.append(songTitleSearchList);
+      }
     }
   }
 
@@ -473,6 +482,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
+
 //   searchButtonArtist.addEventListener("click", YouTubeSearchByArtist);
 
   searchButtonTitle.addEventListener("click", function YouTubeSearchByTitle() {
@@ -517,24 +527,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   // Terry's Ticketmaster API
+  //Adding variables for all ticketmaster related elements from HTML
   var artistsearch = document.getElementById("artistbuttons");
-  var titlesearch = document.getElementById("titlebuttons");
   var concertdisplay = document.getElementById("concertevent");
   var concertdate = document.getElementById("concertdate");
   var concertname = document.getElementById("concertname");
   var venuename = document.getElementById("venuename");
   var concerturl = document.getElementById("concerturl");
 
+  //Artist search function which is independent from lastFM API
   function Ticketmaster() {
+    //function to clear whenever another search happens
     clearinterval();
     var TicketUrlSearch =
       "https://app.ticketmaster.com/discovery/v2/events.json?keyword=";
     var TicketUrlAPI = "&countryCode=US&apikey=";
     var TicketAPIKey = "fa4oEMRMib4vxQg2FPdmxH9JKdFeSeaC";
     var UserInput = document.getElementById("artistinput").value;
-
     var url = TicketUrlSearch + UserInput + TicketUrlAPI + TicketAPIKey;
-
+    //fetching ticketmaster API
     fetch(url)
       .then((response) => {
         if (response.ok) {
@@ -543,28 +554,30 @@ document.addEventListener("DOMContentLoaded", function () {
         throw new Error(response.statusText);
       })
       .then(function (data) {
-        console.log(data._embedded.events[0]);
-        console.log(data._embedded.events[0].name);
-        console.log(data._embedded.events[0].dates.start.localDate);
-        console.log(data._embedded.events[0].products[0].name);
-        console.log(data._embedded.events[0]._embedded.venues[0].name);
-        console.log(data._embedded.events[0].url);
-
+        // console.log(data);
+        // console.log(data._embedded.events[0]);
+        // console.log(data._embedded.events[0].name);
+        // console.log(data._embedded.events[0].dates.start.localDate);
+        // console.log(data._embedded.events[0].products[0].name);
+        // console.log(data._embedded.events[0]._embedded.venues[0].name);
+        // console.log(data._embedded.events[0].url);
+        //setting variables for all necessary values for event, names, etc.
         var eventname = data._embedded.events[0].name;
         var eventdate = data._embedded.events[0].dates.start.localDate;
         var eventconcertname = data._embedded.events[0].products[0].name;
         var placename = data._embedded.events[0]._embedded.venues[0].name;
         var eventurl = data._embedded.events[0].url;
-
+        //adds text based on the value received from api
         concertdisplay.textContent += eventname;
         concertdate.textContent += eventdate;
         concertname.textContent += eventconcertname;
         venuename.textContent += placename;
-        // document.getElementById('concerturl').setAttribute('href', eventurl);
         concerturl.textContent += eventurl;
-        // document.getElementById("#concertLink").innerHTML("<a href =" + eventurl + ">" + "</a>")
-        
-        document.getElementById('concerturl').setAttribute('href', eventurl);
+
+
+        //adding href specifically for the event's url
+        document.getElementById("concerturl").setAttribute('href',eventurl);
+
       })
       .catch(function (error) {
         console.log("Error: ", error);
@@ -572,17 +585,20 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   artistsearch.addEventListener("click", Ticketmaster);
-
+  //Song title search function that is dependent on lastFM API to grab the name of the artist 
   function Ticketmastersongtitle(data) {
+    //clear function for when another search is happened.
     clearinterval();
+    //ticketmaster API key and link
     var TicketUrlSearch =
       "https://app.ticketmaster.com/discovery/v2/events.json?keyword=";
     var TicketUrlAPI = "&countryCode=US&apikey=";
     var TicketAPIKey = "fa4oEMRMib4vxQg2FPdmxH9JKdFeSeaC";
+    //The value received from lastFM API 
     var UserInput = data;
 
     var url = TicketUrlSearch + UserInput + TicketUrlAPI + TicketAPIKey;
-    console.log(UserInput);
+    // console.log(UserInput);
     fetch(url)
       .then((response) => {
         if (response.ok) {
@@ -591,13 +607,14 @@ document.addEventListener("DOMContentLoaded", function () {
         throw new Error(response.statusText);
       })
       .then(function (data) {
-        console.log(data._embedded.events[0]);
-        console.log(data._embedded.events[0].name);
-        console.log(data._embedded.events[0].dates.start.localDate);
-        console.log(data._embedded.events[0].products[0].name);
-        console.log(data._embedded.events[0]._embedded.venues[0].name);
-        console.log(data._embedded.events[0].url);
-
+        // console.log(data);
+        // console.log(data._embedded.events[0]);
+        // console.log(data._embedded.events[0].name);
+        // console.log(data._embedded.events[0].dates.start.localDate);
+        // console.log(data._embedded.events[0].products[0].name);
+        // console.log(data._embedded.events[0]._embedded.venues[0].name);
+        // console.log(data._embedded.events[0].url);
+        //same as artist search function, setting specific variables for API values
         var eventname = data._embedded.events[0].name;
         var eventdate = data._embedded.events[0].dates.start.localDate;
         var eventconcertname = data._embedded.events[0].products[0].name;
@@ -609,11 +626,15 @@ document.addEventListener("DOMContentLoaded", function () {
         concertname.textContent += eventconcertname;
         venuename.textContent += placename;
         concerturl.textContent += eventurl;
+
+        document.getElementById("concerturl").setAttribute('href',eventurl);
       })
       .catch(function (error) {
         console.log("Error: ", error);
       });
+      //no eventlistener necessary because the song title search is not independent call by click, unlike the artist search
   }
+  //a reset function for when user does another search
   function clearinterval()
   {
     concertdisplay.textContent = "";
@@ -623,5 +644,4 @@ document.addEventListener("DOMContentLoaded", function () {
     concerturl.textContent = "";
 
   };
-  titlesearch.addEventListener("click", Ticketmastersongtitle);
 });
