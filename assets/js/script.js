@@ -1,3 +1,7 @@
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+
 // places everything in a function so that when the page is loaded, all of this executes
 document.addEventListener("DOMContentLoaded", function () {
   // Materialize-related resizing transformation
@@ -196,6 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (searchType === "artist") {
     //   console.log("ARTIST IS WORKING");
       lastfmAPICallArtistTopSongs(input);
+    //   Ticketmaster(input);
       // ARTIST ONLY
       // goal is to display the same artist results as initial search, but this time we're displaying them when user clicks an artist in search history
       // call the appropriate Youtube API function here and pass it the correct data
@@ -203,6 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else if (searchType === "songTitle") {
       console.log("SONG TITLE IS RUNNING");
       lastfmAPICallSongTitleSearch(input);
+    //   YouTubeSearchByTitle(input);
       // SONG TITLE ONLY
       // goal is to display the same sont title results as initial search, but this time we're displaying them when user clicks an artist in search history
       // call the appropriate Youtube API function here and pass it the correct data
@@ -386,11 +392,20 @@ document.addEventListener("DOMContentLoaded", function () {
     for (var i = 0; i < 5; i++) {
       var songTitleNameTopFive = data.results.trackmatches.track[i].name;
       var songTitleArtistTopFive = data.results.trackmatches.track[i].artist;
-      var resultsSongAndArtist =
-        songTitleNameTopFive + " " + "by " + songTitleArtistTopFive;
+      if(i === 0) {
+        var resultsSongAndArtist =
+        "<li>"+ "Top 5 Songs:" + "<br>" + "<br>" + songTitleNameTopFive + " " + "by " + songTitleArtistTopFive + "</li>";
       console.log(resultsSongAndArtist);
       songTitleSearchList.append(resultsSongAndArtist);
       songTitleSearchDiv.append(songTitleSearchList);
+      } else {
+        var resultsSongAndArtist =
+        "<li>" + songTitleNameTopFive + " " + "by " + songTitleArtistTopFive + "</li>";
+      console.log(resultsSongAndArtist);
+      songTitleSearchList.append(resultsSongAndArtist);
+      songTitleSearchDiv.append(songTitleSearchList)
+      }
+      
     }
   }
 
