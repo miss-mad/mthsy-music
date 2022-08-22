@@ -293,7 +293,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // catches any errors the user might input and displays an error message
       .catch(function (error) {
-        console.log("error from API: ", error);
+        console.log("Error from lastfm artist API: ", error);
       });
   }
 
@@ -305,18 +305,18 @@ document.addEventListener("DOMContentLoaded", function () {
     var artistTopSongsDiv = $("#lastFMInfo");
 
     var artistTopSongsCard = $("<div>");
-    artistTopSongsCard.attr("class", "card");
-    artistTopSongsCard.attr("class", "blue-grey");
-    artistTopSongsCard.attr("class", "darken-1");
+    // artistTopSongsCard.attr("class", "card");
+    // artistTopSongsCard.attr("class", "blue-grey");
+    // artistTopSongsCard.attr("class", "darken-1");
 
     // var artistTopSongsCardContent = $("#lastfm-card-content");
     // artistTopSongsCardContent.attr("class", "card-content");
     // artistTopSongsCardContent.attr("class", "white-text");
 
-    var artistTopSongsTitle = $("#lastfm-card-title");
-    artistTopSongsTitle.text("Top 5 songs");
+    // var artistTopSongsTitle = $("#lastfm-card-title");
+    // artistTopSongsTitle.text("Top 5 songs");
 
-    var artistTopSongsList = $("#lastfm-card-list");
+    // var artistTopSongsList = $("#lastfm-card-list");
     // artistTopSongsList.text("I am a very simple card.");
 
     var li = $("<li>");
@@ -397,7 +397,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // catches any errors the user might input and displays an error message
       .catch(function (error) {
-        console.log("error from LastFM API: ", error);
+        console.log("Error from lastfm song title API: ", error);
         // insert another modal here that says
         // "ERROR - please make sure you have spelled the song title correctly"
       });
@@ -556,7 +556,7 @@ document.addEventListener("DOMContentLoaded", function () {
           "https://www.youtube.com/embed/" + UniqueVidId;
       })
       .catch(function (error) {
-        console.log("Error from Youtube API: ", error);
+        console.log("Error from Youtube by song title API: ", error);
       });
   }
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -622,7 +622,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       })
       .catch(function (error) {
-        console.log("Error at Ticketmaster API call: ", error);
+        console.log("Error from Ticketmaster artist API: ", error);
       });
   }
 
@@ -676,7 +676,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("concerturl").setAttribute('href',eventurl);
       })
       .catch(function (error) {
-        console.log("Error in Ticketmaster API call: ", error);
+        console.log("Error from Ticketmaster song title API: ", error);
       });
       //no eventlistener necessary because the song title search is not independent call by click, unlike the artist search
   }
