@@ -64,7 +64,7 @@ Below are screenshots of the deployed application:
 ![MTHSY Music! Screenshot 2 Artist Search](./assets/images/mthsy_music_final_screenshot2.JPG)
 ![MTHSY Music! Screenshot 3 Song Title Search](./assets/images/mthsy_music_final_screenshot3.JPG)
 ![MTHSY Music! Screenshot 4 Search History](./assets/images/mthsy_music_final_screenshot4.JPG)
-![MTHSY Music! Screenshot 5 About Us](./assets/images/mthsy_music_final_screenshot5.JPG)
+![MTHSY Music! Screenshot 5 About Us](./assets/images/mthsy_music_final_screenshot5.png)
 ![MTHSY Music! Screenshot 6 Artist Search Mobile Version](./assets/images/mthsy_music_final_screenshot6.JPG)
 ![MTHSY Music! Screenshot 7 About Us Mobile Version](./assets/images/mthsy_music_final_screenshot7.png)
 
