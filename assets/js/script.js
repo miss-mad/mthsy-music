@@ -524,7 +524,7 @@ document.addEventListener("DOMContentLoaded", function () {
       VideoDisplay.style.display = "block";
     }
 
-    urlFriendlyArtist = songTitleName.replace(/\s/g, "+");
+    urlFriendlyArtist = songName.replace(/\s/g, "+");
     urlFriendlySong = songName.replace(/\s/g, "+");
 
     var fullYTURLPathTitle = ytURL + songName + ytAPIKey;
