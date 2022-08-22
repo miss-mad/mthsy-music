@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta class="responsive-img" charset="UTF-8" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Music information available by artist search or song title search"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" type="text/css" />
     <title>MTHSY Music Search</title>
   </head>
 
   <body>
-    <nav> 
+    <nav>
       <div class="nav-wrapper">
         <a id="brand-logo" class="brand-logo">&emsp;IT'S MTHSY MUSIC!</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -30,68 +35,78 @@
     </ul>
     <a href="#" data-target="slide-out" class="sidenav-trigger"></a>
 
-    <br>
+    <br />
 
-    <div
-      id="main-content"
-      class="row"
-    >
+    <main id="main-content" class="row">
       <div class="input-field col s12 m5">
         <input id="artistinput" class="materialize-input" type="text" />
         <label id="textarea1" for="artistinput">Find an artist!</label>
         <button id="artistbuttons" class="btn artistbutton">Search!</button>
       </div>
-      <div
-        class="col s12 m2"
-      >
+      <div class="col s12 m2">
         <!-- Dropdown Trigger -->
-
-        <button class="dropdown-trigger btn" href="#" data-target="dropdown1"
-          >🔎</button
+        <button
+          class="dropdown-trigger btn"
+          id="historybutton"
+          href="#"
+          data-target="dropdown1"
         >
-
-
+          🔎 History
+        </button>
         <!-- Dropdown Structure -->
         <ul id="dropdown1" class="dropdown-content">
           <!-- dynamically generate search history list in js to display search history artists and song titles as the list grows -->
-          <!-- example of search history item -->
-          <li><a href="#!">Find them again!</a></li>
-          <!-- <li>artist one</li>  -->
         </ul>
       </div>
-      <div class="input-field col s12 m5" >
+      <div class="input-field col s12 m5">
         <input id="titleinput" class="materialize-textarea" type="text" />
         <label id="textarea1" for="titleinput">Find a song title!</label>
         <button id="titlebuttons" class="btn titlebutton">Search!</button>
       </div>
-    </div>
 
-    <section class="container" id="displayinfo">
-      <div class="row">
-      <div class="card-panel pink lighten-5 col s12 m6" id="lastFMInfo"></div>
-      <ul class="col s12 m6" style="list-style-type: none">
-        <li id="songsuggestion1"></li>
-        <li class="video-container">
-          <iframe
-            
-            id="YouTubeVideo"
-            style="display: none"
-            height="500"
-            width="100%"
-          >
-          </iframe>
-        </li>
-      </ul>
-      </div>
-      <br>
-      <ul>
-        <li id="concertevent"></li>
-        <li id="concertdate"></li>
-        <li id="concertname"></li>
-        <li id="venuename"></li>
-        <a li id="concerturl"></a>
-      </ul>
-    </section>
+      <section class="container" id="displayinfo">
+        <div class="row">
+          <div
+            class="card-panel pink lighten-5 col s12 m6"
+            id="lastFMInfo"
+          ></div>
+          <ul class="col s12 m6" style="list-style-type: none">
+            <li id="songsuggestion1"></li>
+            <li class="video-container">
+              <iframe
+                id="YouTubeVideo"
+                style="display: none"
+                height="500"
+                width="100%"
+              >
+              </iframe>
+            </li>
+          </ul>
+        </div>
+        <br />
+        <ul>
+          <li id="concertevent"></li>
+          <li id="concertdate"></li>
+          <li id="concertname"></li>
+          <li id="venuename"></li>
+          <a li id="concerturl"></a>
+        </ul>
+        <!-- materialize's card-panel if we have time to put concert into in a box -->
+        <!-- <div class="row">
+          <div class="col s12 m5">
+            <div class="card-panel pink" id="ticketmasterInfo">
+              <ul class="col s6" style="list-style-type: none">
+                <li id="concertevent"></li>
+                <li id="concertdate"></li>
+                <li id="concertname"></li>
+                <li id="venuename"></li>
+                <a li id="concerturl"></a>
+              </ul>
+            </div>
+          </div>
+        </div> -->
+      </section>
+    </main>
 
     <footer>
       &nbsp;Made by MTHSY <br />
@@ -99,7 +114,7 @@
       Anbessa
     </footer>
 
-    <br>
+    <br />
 
     <div id="modal" class="modal">
       <div class="modal-content">

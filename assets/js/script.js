@@ -143,7 +143,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var dividerMiddle = $("<li>");
     dividerMiddle.css("class", "divider");
     dividerMiddle.attr("tabindex", "1");
-    dividerMiddle.text("___________________");
+    dividerMiddle.text("___________");
+    dividerMiddle.css("text-align", "center")
     searchHistoryDropdown.append(dividerMiddle);
 
     // create and append a title for song title to the dropdown
@@ -196,16 +197,31 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("lastFMInfo").innerHTML = "";
 
     // tells the computer which function to call in accordance to which search bar was used. if no input was given in one of the search bars, then don't display anything (return keyword tells it to stop doing stuff)
+    $("#artistinput").val("");
+    $("#titleinput").val("");
+
+
     if (searchType === "artist") {
-    //   console.log("ARTIST IS WORKING");
+      //   console.log("ARTIST IS WORKING");
+      
+      $("#artistinput").focus();
+      $("#artistinput").val(input);
+
       lastfmAPICallArtistTopSongs(input);
+      Ticketmaster();
+
       // ARTIST ONLY
       // goal is to display the same artist results as initial search, but this time we're displaying them when user clicks an artist in search history
       // call the appropriate Youtube API function here and pass it the correct data
       // call the appropriate Ticketmaster API function and pass it the correct data
     } else if (searchType === "songTitle") {
-      console.log("SONG TITLE IS RUNNING");
+      // console.log("SONG TITLE IS RUNNING");
+
+      $("#titleinput").focus();
+      $("#titleinput").val(input);
+
       lastfmAPICallSongTitleSearch(input);
+      YouTubeSearchByTitle();
       // SONG TITLE ONLY
       // goal is to display the same sont title results as initial search, but this time we're displaying them when user clicks an artist in search history
       // call the appropriate Youtube API function here and pass it the correct data
@@ -271,7 +287,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // calls the displayArtistTopSongs() function so that that function will be able to use the lastfm data
       .then(function (data) {
-
+        console.log("lastFM data: ", data);
         // searchresults += data;
         // console.log("artist top songs: ", data);
 
@@ -281,35 +297,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // catches any errors the user might input and displays an error message
       .catch(function (error) {
-        console.log("error from API: ", error);
+        console.log("Error from lastfm artist API: ", error);
       });
   }
 
   // function to display the top five songs of any given artist the user searched for
   function displayArtistTopSongs(data) {
-    $("#artistinput").val("");
+    // $("#artistinput").val("");
     document.getElementById("lastFMInfo").innerHTML = "";
 
     var artistTopSongsDiv = $("#lastFMInfo");
-    var artistTopSongsList = $("#lastFMInfo");
+
+    var artistTopSongsCard = $("<div>");
+
+    var li = $("<li>");
+    var br = $("<br>");
+    li.text("Top 5 Songs: ");
+    li.append(br);
+    li.append(br);
+
+    var listHeader = li;
+
+    artistTopSongsDiv.append(listHeader);
 
     // for loop to loop through the first 5 songs in the given lastfm data and display them in a dynamically created div
     for (var i = 0; i < 5; i++) {
-
-      if (i===0) {
-    var topFiveTracks = "<li>" + "Top 5 Songs: <br> <br>" + data.toptracks.track[i].name + "</li>";
-    //   console.log(topFiveTracks);
-      artistTopSongsList.append(topFiveTracks);
-      artistTopSongsDiv.append(artistTopSongsList);
-      } 
-      else {
-    var topFiveTracks = "<li>" + data.toptracks.track[i].name + "</li>";
-    //   console.log(topFiveTracks);
-      artistTopSongsList.append(topFiveTracks);
-      artistTopSongsDiv.append(artistTopSongsList);
-      }
-
-
+      var list = $("<li>"); 
+      var track = data.toptracks.track[i].name;
+      list.text(track)
+      artistTopSongsCard.append(list);
+      artistTopSongsDiv.append(artistTopSongsCard);
     }
   }
 
@@ -371,7 +388,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // catches any errors the user might input and displays an error message
       .catch(function (error) {
-        console.log("error from API: ", error);
+        console.log("Error from lastfm song title API: ", error);
         // insert another modal here that says
         // "ERROR - please make sure you have spelled the song title correctly"
       });
@@ -380,7 +397,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // function to display the top five matching song + artist results of any given song title the user searched for
   function displaySongTitleSearch(data) {
     var userInputSongTitleSearch = $("#titleinput").val().trim();
-    $("#titleinput").val("");
+    // $("#titleinput").val("");
     // console.log(userInputSongTitleSearch);
     document.getElementById("lastFMInfo").innerHTML = "";
 
@@ -420,13 +437,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // function to give youtube API the lastfm artistTopSongs data (just the first song to retrieve a video)
   function lastfmAPIToYoutubeAPI(firstSong) {
-    // console.log(firstSong);
+    console.log(firstSong);
     // single variable for implementing into the youtube API
     // insert plus signs into the spaces
     var firstArtistSongForYoutubeAPI = firstSong.toptracks.track[0].name
       .split(" ")
       .join("+");
-    // console.log(firstArtistSongForYoutubeAPI);
+    console.log(firstArtistSongForYoutubeAPI);
     YouTubeSearchByArtist(firstArtistSongForYoutubeAPI);
 
     // console.log(YouTubeSearchByArtist);
@@ -469,49 +486,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch(fullYTURLPathArtist)
       .then(function (response) {
         // console.log(response);
-        if (response.status === 200) {
-          return response.json();
-        }
-        throw new Error(response.statusText);
-      })
-      .then(function (data) {
-        // console.log(data.items[0].id.videoId);
-
-        var UniqueVidId = data.items[0].id.videoId;
-        document.getElementById("YouTubeVideo").src =
-          "https://www.youtube.com/embed/" + UniqueVidId;
-      })
-      .catch(function (error) {
-        console.log("Error from API: ", error);
-      });
-  }
-
-//   searchButtonArtist.addEventListener("click", YouTubeSearchByArtist);
-
-  searchButtonTitle.addEventListener("click", function YouTubeSearchByTitle() {
-    const ytURL =
-      "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&videoSyndicated=true&videoEmbeddable=true&q=";
-    var ytAPIKey = "&key=AIzaSyCWnH7bNyWEB88X6WFI9tLPCGqPa9ueJBA";
-
-    var artistName = document.getElementById("artistinput").value;
-    var songName = document.getElementById("titleinput").value;
-    var VideoDisplay = document.querySelector("#YouTubeVideo");
-
-    if ((VideoDisplay.style.display = "none")) {
-      VideoDisplay.style.display = "block";
-    }
-
-    urlFriendlyArtist = artistName.replace(/\s/g, "+");
-    urlFriendlySong = songName.replace(/\s/g, "+");
-
-    var fullYTURLPathTitle = ytURL + songName + ytAPIKey;
-
-    console.log(fullYTURLPathTitle);
-
-    fetch(fullYTURLPathTitle)
-      .then(function (response) {
-        console.log(response);
-        if (response.status === 200) {
+        if (response.ok) {
           return response.json();
         }
         throw new Error(response.statusText);
@@ -524,10 +499,57 @@ document.addEventListener("DOMContentLoaded", function () {
           "https://www.youtube.com/embed/" + UniqueVidId;
       })
       .catch(function (error) {
-        console.log("Error from API: ", error);
+        console.log("Error from Youtube by artist API: ", error);
       });
-  });
+  }
 
+//   searchButtonArtist.addEventListener("click", YouTubeSearchByArtist);
+
+  searchButtonTitle.addEventListener("click", YouTubeSearchByTitle);
+
+  function YouTubeSearchByTitle() {
+    
+    console.log("RUNNING YOUTUBE FUNCTION");
+    const ytURL =
+      "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&videoSyndicated=true&videoEmbeddable=true&q=";
+    var ytAPIKey = "&key=AIzaSyCWnH7bNyWEB88X6WFI9tLPCGqPa9ueJBA";
+
+    var songName = document.getElementById("titleinput").value;
+    if (!songName) {
+      return;
+    }
+    var VideoDisplay = document.querySelector("#YouTubeVideo");
+
+    if ((VideoDisplay.style.display = "none")) {
+      VideoDisplay.style.display = "block";
+    }
+
+    urlFriendlyArtist = songTitleName.replace(/\s/g, "+");
+    urlFriendlySong = songName.replace(/\s/g, "+");
+
+    var fullYTURLPathTitle = ytURL + songName + ytAPIKey;
+
+    console.log(fullYTURLPathTitle);
+
+    fetch(fullYTURLPathTitle)
+      .then(function (response) {
+        console.log(response);
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(response.statusText);
+      })
+      .then(function (data) {
+        console.log(data.items[0].id.videoId);
+
+        var UniqueVidId = data.items[0].id.videoId;
+        document.getElementById("YouTubeVideo").src =
+          "https://www.youtube.com/embed/" + UniqueVidId;
+      })
+      .catch(function (error) {
+        console.log("Error from Youtube by song title API: ", error);
+      });
+  }
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   // Terry's Ticketmaster API
   //Adding variables for all ticketmaster related elements from HTML
@@ -547,6 +569,10 @@ document.addEventListener("DOMContentLoaded", function () {
     var TicketUrlAPI = "&countryCode=US&apikey=";
     var TicketAPIKey = "fa4oEMRMib4vxQg2FPdmxH9JKdFeSeaC";
     var UserInput = document.getElementById("artistinput").value;
+    console.log(UserInput)
+    if (!UserInput) {
+      return;
+    }
     var url = TicketUrlSearch + UserInput + TicketUrlAPI + TicketAPIKey;
     //fetching ticketmaster API
     fetch(url)
@@ -557,7 +583,7 @@ document.addEventListener("DOMContentLoaded", function () {
         throw new Error(response.statusText);
       })
       .then(function (data) {
-        // console.log(data);
+        console.log(data);
         // console.log(data._embedded.events[0]);
         // console.log(data._embedded.events[0].name);
         // console.log(data._embedded.events[0].dates.start.localDate);
@@ -567,13 +593,17 @@ document.addEventListener("DOMContentLoaded", function () {
         //setting variables for all necessary values for event, names, etc.
         var eventname = data._embedded.events[0].name;
         var eventdate = data._embedded.events[0].dates.start.localDate;
-        var eventconcertname = data._embedded.events[0].products[0].name;
+        var eventconcertname = data._embedded.events[0].products
+          ? data._embedded.events[0].products[0].name
+          : undefined;
         var placename = data._embedded.events[0]._embedded.venues[0].name;
         var eventurl = data._embedded.events[0].url;
         //adds text based on the value received from api
         concertdisplay.textContent += eventname;
         concertdate.textContent += eventdate;
-        concertname.textContent += eventconcertname;
+        if(eventconcertname !== undefined) {
+          concertname.textContent += eventconcertname;
+        }
         venuename.textContent += placename;
         concerturl.textContent += eventurl;
 
@@ -582,7 +612,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       })
       .catch(function (error) {
-        console.log("Error: ", error);
+        console.log("Error from Ticketmaster artist API: ", error);
       });
   }
 
@@ -609,7 +639,7 @@ document.addEventListener("DOMContentLoaded", function () {
         throw new Error(response.statusText);
       })
       .then(function (data) {
-        // console.log(data);
+        console.log(data);
         // console.log(data._embedded.events[0]);
         // console.log(data._embedded.events[0].name);
         // console.log(data._embedded.events[0].dates.start.localDate);
@@ -619,20 +649,24 @@ document.addEventListener("DOMContentLoaded", function () {
         //same as artist search function, setting specific variables for API values
         var eventname = data._embedded.events[0].name;
         var eventdate = data._embedded.events[0].dates.start.localDate;
-        var eventconcertname = data._embedded.events[0].products[0].name;
+        var eventconcertname = data._embedded.events[0].products
+          ? data._embedded.events[0].products[0].name
+          : undefined;
         var placename = data._embedded.events[0]._embedded.venues[0].name;
         var eventurl = data._embedded.events[0].url;
 
         concertdisplay.textContent += eventname;
         concertdate.textContent += eventdate;
-        concertname.textContent += eventconcertname;
+        if(eventconcertname !== undefined) {
+          concertname.textContent += eventconcertname;
+        }
         venuename.textContent += placename;
         concerturl.textContent += eventurl;
 
         document.getElementById("concerturl").setAttribute('href',eventurl);
       })
       .catch(function (error) {
-        console.log("Error: ", error);
+        console.log("Error from Ticketmaster song title API: ", error);
       });
       //no eventlistener necessary because the song title search is not independent call by click, unlike the artist search
   }

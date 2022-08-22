@@ -1,25 +1,25 @@
 html {
-  
-  background:url(../images/backgroud.PNG);/*Added this to change background, can edit with this*/
+  background: url(../images/backgroud.PNG); /*Added this to change background, can edit with this*/
   background-repeat: no-repeat; /*Added this to change background, can edit with this*/
-  background-size: 2560px 1762px;/*Added this to change background, can edit with this*/
+  background-size: 2560px 1762px; /*Added this to change background, can edit with this*/
   min-height: 100%;
   font-family: sans-serif, "Times New Roman", Times, serif;
   position: relative;
   padding-bottom: 50px;
 }
 
-body{
+body {
   height: 100%;
   max-width: 100%;
 }
 
+/* navbar styles */
 nav {
-    background-color: transparent;
-    border-bottom: none !important;
-    box-shadow: none !important;
-    margin-bottom: 3in;
-    margin-top: 20px;
+  background-color: transparent;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  margin-bottom: 3in;
+  margin-top: 20px;
 }
 
 .aboutme {
@@ -42,6 +42,16 @@ nav {
   font-weight: bolder;
 }
 
+.aboutme {
+  color: black;
+  font-weight: bold;
+  font-size: large;
+  background-color: peachpuff;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+/* main styles */
 button {
   display: block;
   margin-left: auto;
@@ -49,16 +59,6 @@ button {
   justify-content: center;
   background-color: peachpuff;
   text-align: center;
-  
-}
-
-.btn:hover{
-  background-color: rgb(241, 161, 91);
-}
-
-button:hover{
-  background-color: rgb(241, 161, 91);
-
 }
 
 .btn {
@@ -70,46 +70,57 @@ button:hover{
   background-color: peachpuff;
 }
 
+.btn:hover {
+  background-color: rgb(241, 161, 91);
+}
+
+button:hover {
+  background-color: rgb(241, 161, 91);
+}
 
 textarea {
   text-align: center;
 }
 
-.materialize-input{
-    border-bottom: solid rgb(255, 243, 233) !important;
-    box-shadow: 0px 1px 0px 0px white !important;
-}
-
-.materialize-textarea{
-    border-bottom: solid rgb(255, 243, 233) !important;
-    box-shadow: 0px 1px 0px 0px white !important;
-}
-
-
 label {
   font-weight: bold !important;
   color: black !important;
-  
 }
 
+.materialize-input {
+  border-bottom: solid rgb(255, 243, 233) !important;
+  box-shadow: 0px 1px 0px 0px white !important;
+}
 
+.materialize-textarea {
+  border-bottom: solid rgb(255, 243, 233) !important;
+  box-shadow: 0px 1px 0px 0px white !important;
+}
+
+/* api call data info display styles */
 #displayinfo {
   font-weight: bold;
 }
 
+/* .card-panel {
+  padding: none !important;
+} */
 
-#concertevent, #concertdate, #concertname, #venuename, #concerturl
-{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
+#concertevent,
+#concertdate,
+#concertname,
+#venuename,
+#concerturl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
 }
 
 #concerturl {
-    color: magenta;
-    text-align: center;
+  color: magenta;
+  text-align: center;
 }
 
 #lastFMInfo {
@@ -119,20 +130,28 @@ label {
   box-shadow: none !important;
 }
 
-#songvideo 
-{
+#concertevent,
+#concertdate,
+#concertname,
+#venuename,
+#concerturl {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
 }
 
+#concerturl {
+  color: blue;
+}
 
-footer{
-    text-align: center;
-    position:absolute;
-    bottom:0;
-    height: 50px;
-    width:100%;
-    font-weight: bold;
+/* footer styles */
+footer {
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+  font-weight: bold;
 }
