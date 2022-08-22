@@ -12,7 +12,7 @@ MTHSY Music! By MTHSY (Madeleine Harris, Terry Kim, Hunter O'Neal, Serraiah Floy
 
 ## Description
 
-MTHSY Music! is a music search application that displays speciifc information about an artist or a song. 
+MTHSY Music! is a music search application that displays specific information about an artist or a song. 
 
 - It allows a user to search an artist or a song title. 
 - If an artist is searched, then it will display their top 5 most played songs, a YouTube video of the top played song, and an upcoming concert involving that artist within the United States.
@@ -60,7 +60,13 @@ How to use:
 
 Below are screenshots of the deployed application:
 
-![Screenshot 1](./)
+![MTHSY Music! Screenshot 1](./assets/images/mthsy_music_final_screenshot1.JPG)
+![MTHSY Music! Screenshot 2 Artist Search](./assets/images/mthsy_music_final_screenshot2.JPG)
+![MTHSY Music! Screenshot 3 Song Title Search](./assets/images/mthsy_music_final_screenshot3.JPG)
+![MTHSY Music! Screenshot 4 Search History](./assets/images/mthsy_music_final_screenshot4.JPG)
+![MTHSY Music! Screenshot 5 About Us](./assets/images/mthsy_music_final_screenshot5.JPG)
+![MTHSY Music! Screenshot 6 Artist Search Mobile Version](./assets/images/mthsy_music_final_screenshot6.JPG)
+![MTHSY Music! Screenshot 7 About Us Mobile Version](./assets/images/mthsy_music_final_screenshot7.png)
 
 ## Credits
 
@@ -80,8 +86,6 @@ https://www.last.fm/api
 https://developer.ticketmaster.com/products-and-docs/apis/getting-started/
 
 https://developers.google.com/youtube/v3
-
-
 
 ## License
 
