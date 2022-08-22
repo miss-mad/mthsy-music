@@ -1,23 +1,16 @@
 html{
-    background:url("./images/backgroud.PNG");/*Added this to change background, can edit with this*/
-    background-repeat: no-repeat; /*Added this to change background, can edit with this*/
-    background-size: 2560px 1762px;/*Added this to change background, can edit with this*/
-
+    background:url("./images/backgroud.PNG");
+    background-repeat: no-repeat; 
+    background-size: 2560px 1762px;
+    min-height: 100%;
 }
 
 body{
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
-    margin-right: -20%;
-
+    align-items: center;
  
 }
-
-
-h1{
-    margin-right: 16%;
-}
-
 
 p,span{
     font-weight: 500;
@@ -25,10 +18,31 @@ p,span{
 
 img{
     
-    width: 30%;}
+    width: 142px;
+    height: 161px;
+}
 
 
 button{
     width:50%;
+
 }
 
+.card-panel{
+    height: 315.25px !important;
+}
+
+@media screen and (max-width: 800px){
+    html{
+        background-size: cover;
+    }
+    .row{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+}
+    

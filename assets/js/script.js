@@ -1,3 +1,7 @@
+$(document).ready(function(){
+    $('.sidebar').sidenav();
+});
+
 // places everything in a function so that when the page is loaded, all of this executes
 document.addEventListener("DOMContentLoaded", function () {
   // Materialize-related resizing transformation
@@ -305,19 +309,6 @@ document.addEventListener("DOMContentLoaded", function () {
     var artistTopSongsDiv = $("#lastFMInfo");
 
     var artistTopSongsCard = $("<div>");
-    // artistTopSongsCard.attr("class", "card");
-    // artistTopSongsCard.attr("class", "blue-grey");
-    // artistTopSongsCard.attr("class", "darken-1");
-
-    // var artistTopSongsCardContent = $("#lastfm-card-content");
-    // artistTopSongsCardContent.attr("class", "card-content");
-    // artistTopSongsCardContent.attr("class", "white-text");
-
-    // var artistTopSongsTitle = $("#lastfm-card-title");
-    // artistTopSongsTitle.text("Top 5 songs");
-
-    // var artistTopSongsList = $("#lastfm-card-list");
-    // artistTopSongsList.text("I am a very simple card.");
 
     var li = $("<li>");
     var br = $("<br>");
@@ -366,7 +357,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function lastfmAPICallSongTitleSearch(songTitle) {
     // creates the queryURL, which is the baseURL appended to the query terms, to be used in the fetch API
     var baseURL =
-      "http://ws.audioscrobbler.com/2.0/?method=track.search&format=json";
+      "https://ws.audioscrobbler.com/2.0/?method=track.search&format=json";
 
     var lastfmAPIKey = "807f87e7dcc6c31a458c4ab1feb542c2";
     var parametersSongTitleSearch = `&api_key=${lastfmAPIKey}&track=${songTitle}`;
@@ -616,7 +607,6 @@ document.addEventListener("DOMContentLoaded", function () {
         venuename.textContent += placename;
         concerturl.textContent += eventurl;
 
-
         //adding href specifically for the event's url
         document.getElementById("concerturl").setAttribute('href',eventurl);
 
@@ -691,3 +681,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   };
 });
+
+//button trigger upon pressing enter
+var enter = document.getElementById("artistinput");
+
+enter.addEventListener("keypress", function(event){
+  if(event.key === "Enter")
+  {
+    event.preventDefault();
+    document.getElementById("artistbuttons").click();
+  }
+})
+
+var enter = document.getElementById("titleinput");
+
+enter.addEventListener("keypress", function(event){
+  if(event.key === "Enter")
+  {
+    event.preventDefault();
+    document.getElementById("titlebuttons").click();
+  }
+})
