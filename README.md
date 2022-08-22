@@ -1,5 +1,5 @@
-# MTHSY MUSIC
-Tagline
+# MTHSY MUSIC!
+MTHSY Music! By MTHSY (Madeleine Harris, Terry Kim, Hunter O'Neal, Serraiah Floyd, Yohannes Anbessa)
 
 ## Table of Contents
 
@@ -12,15 +12,37 @@ Tagline
 
 ## Description
 
-💡 Remember: A README file acts like a virtual storefront to a repository. A high-quality README file explains what your application does and why you used the technologies that you did. At a bare minimum, a README needs a title and a short description explaining the what, why, and how of the project. Your README might also describe some of the challenges you faced, as well as the features you plan to implement in the future.
+MTHSY Music! is a music search application that displays speciifc information about an artist or a song. 
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+- It allows a user to search an artist or a song title. 
+- If an artist is searched, then it will display their top 5 most played songs, a YouTube video of the top played song, and an upcoming concert involving that artist within the United States.
+- If a song title is searched, then it will display the top five song titles that match the search result, a YouTube video of the top played song, and an upcoming concert involving that artist.
+- If any blanks are inputed, then it will display an error modal to ask them to search again.
+- If any concerts or events involving an artist is not within the United States, then it will display everything but the upcoming concert information.
+
+<br>
 
 - What was your motivation?
+
+As music lovers, there many of us who enjoy specific songs, specific artists, or attending concerts. There are times where we forget the name of a popular song, or miss a concert, because we never knew a certain artist was having any concerts in the first place. 
+
 - Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
+
+So why not create an application that fixes those problems altogether? This application was created for music lovers who want to know an artist's top tracks and see any upcoming concerts featuring that artist.
+
 - What problem does it solve?
+
+Isn't it just a hassle when you forget that one song name that you already know of? Doesn't it frustrate you when there was a concert you missed, because you had no knowledge of it? 
+This application will always be updated to show the next upcoming concert, or the most played track.
+
 - What did you learn?
+
+We learned using multiple APIs cause chain-links of problems if one happened to not function well. However, we also learned that posing certain APIs independently and dependently on specific functions allow the user to understand how the function is ran, called, or fetched. 
+
 - What makes your project stand out?
+
+Our project has three APIs: lastFM, YouTube, and TicketMaster.
+We used lastFM's API as our main independent API, so that certain values or strings can be received then be called into functions involving YouTube API and TicketMaster API.
 
 ## Deployed Application Link
 
@@ -45,9 +67,19 @@ Below are screenshots of the deployed application:
 Collaborators:
 
 Group 1:
-Hunter O'Neal, Madeleine Harris, Serraiah Floyd, Terry Kim, Yohannes Anbessa
+ Madeleine Harris, Terry Kim, Hunter O'Neal, Serraiah Floyd, Yohannes Anbessa
 
 Links of resources used:
+
+https://www.w3schools.com/
+
+https://developer.mozilla.org/en-US/
+
+https://www.last.fm/api
+
+https://developer.ticketmaster.com/products-and-docs/apis/getting-started/
+
+https://developers.google.com/youtube/v3
 
 
 
@@ -56,7 +88,3 @@ Links of resources used:
 No licenses.
 
 ---
-
-## Features
-
-If your project has a lot of features, list them here.
